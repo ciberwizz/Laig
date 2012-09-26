@@ -1,0 +1,418 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="lsf">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="globals">
+          <xs:complexType>
+			<xs:sequence>
+              <xs:element name="background">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:decimal" name="r"/>
+                      <xs:attribute type="xs:decimal" name="g"/>
+                      <xs:attribute type="xs:decimal" name="b"/>
+                      <xs:attribute type="xs:decimal" name="a"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="polygon">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="mode"/>
+                      <xs:attribute type="xs:string" name="shading"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="culling">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="frontfaceorder"/>
+                      <xs:attribute type="xs:string" name="cullface"/>
+                      <xs:attribute type="xs:boolean" name="enabled"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+			</xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="cameras">
+          <xs:complexType>
+            <xs:choice minOccurs="1" maxOccurs="unbounded">
+              <xs:element name="perspective">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="from">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:decimal" name="x"/>
+                            <xs:attribute type="xs:decimal" name="y"/>
+                            <xs:attribute type="xs:decimal" name="z"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="to">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:decimal" name="x"/>
+                            <xs:attribute type="xs:decimal" name="y"/>
+                            <xs:attribute type="xs:decimal" name="z"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="id"/>
+                  <xs:attribute type="xs:decimal" name="near"/>
+                  <xs:attribute type="xs:decimal" name="far"/>
+                  <xs:attribute type="xs:decimal" name="angle"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ortho">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="id"/>
+                      <xs:attribute type="xs:decimal" name="near"/>
+                      <xs:attribute type="xs:decimal" name="far"/>
+                      <xs:attribute type="xs:decimal" name="left"/>
+                      <xs:attribute type="xs:decimal" name="right"/>
+                      <xs:attribute type="xs:decimal" name="top"/>
+                      <xs:attribute type="xs:decimal" name="bottom"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:choice>
+            <xs:attribute type="xs:string" name="initial"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="lighting">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:element name="ambient">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:decimal" name="r"/>
+                      <xs:attribute type="xs:decimal" name="g"/>
+                      <xs:attribute type="xs:decimal" name="b"/>
+                      <xs:attribute type="xs:decimal" name="a"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="lights">
+                <xs:complexType>
+					<xs:choice minOccurs="1" maxOccurs="unbounded">
+						<xs:element name="light">
+						  <xs:complexType>
+							<xs:sequence>
+							  <xs:element name="location">
+								<xs:complexType>
+								  <xs:simpleContent>
+									<xs:extension base="xs:string">
+									  <xs:attribute type="xs:decimal" name="x"/>
+									  <xs:attribute type="xs:decimal" name="y"/>
+									  <xs:attribute type="xs:decimal" name="z"/>
+									</xs:extension>
+								  </xs:simpleContent>
+								</xs:complexType>
+							  </xs:element>
+							  <xs:element name="ambient">
+								<xs:complexType>
+								  <xs:simpleContent>
+									<xs:extension base="xs:string">
+									  <xs:attribute type="xs:decimal" name="r"/>
+									  <xs:attribute type="xs:decimal" name="g"/>
+									  <xs:attribute type="xs:decimal" name="b"/>
+									  <xs:attribute type="xs:decimal" name="a"/>
+									</xs:extension>
+								  </xs:simpleContent>
+								</xs:complexType>
+							  </xs:element>
+							  <xs:element name="diffuse">
+								<xs:complexType>
+								  <xs:simpleContent>
+									<xs:extension base="xs:string">
+									  <xs:attribute type="xs:decimal" name="r"/>
+									  <xs:attribute type="xs:decimal" name="g"/>
+									  <xs:attribute type="xs:decimal" name="b"/>
+									  <xs:attribute type="xs:decimal" name="a"/>
+									</xs:extension>
+								  </xs:simpleContent>
+								</xs:complexType>
+							  </xs:element>
+							  <xs:element name="specular">
+								<xs:complexType>
+								  <xs:simpleContent>
+									<xs:extension base="xs:string">
+									  <xs:attribute type="xs:decimal" name="r"/>
+									  <xs:attribute type="xs:decimal" name="g"/>
+									  <xs:attribute type="xs:decimal" name="b"/>
+									  <xs:attribute type="xs:decimal" name="a"/>
+									</xs:extension>
+								  </xs:simpleContent>
+								</xs:complexType>
+							  </xs:element>
+							  <xs:element name="spot" minOccurs="0" maxOccurs="1">
+								<xs:complexType>
+								  <xs:simpleContent>
+									<xs:extension base="xs:string">
+									  <xs:attribute type="xs:decimal" name="angle"/>
+									  <xs:attribute type="xs:decimal" name="exponent"/>
+									  <xs:attribute type="xs:decimal" name="dirx"/>
+									  <xs:attribute type="xs:decimal" name="diry"/>
+									  <xs:attribute type="xs:decimal" name="dirz"/>
+									</xs:extension>
+								  </xs:simpleContent>
+								</xs:complexType>
+							  </xs:element>
+							</xs:sequence>
+							<xs:attribute type="xs:string" name="id"/>
+							<xs:attribute type="xs:boolean" name="enabled"/>
+						  </xs:complexType>
+						</xs:element>
+					</xs:choice>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:boolean" name="doublesided"/>
+            <xs:attribute type="xs:boolean" name="local"/>
+            <xs:attribute type="xs:boolean" name="enabled"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="appearances">
+          <xs:complexType>
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+              <xs:element name="appearance">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="emissive">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:decimal" name="r"/>
+                            <xs:attribute type="xs:decimal" name="g"/>
+                            <xs:attribute type="xs:decimal" name="b"/>
+                            <xs:attribute type="xs:decimal" name="a"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ambient">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:decimal" name="r"/>
+                            <xs:attribute type="xs:decimal" name="g"/>
+                            <xs:attribute type="xs:decimal" name="b"/>
+                            <xs:attribute type="xs:decimal" name="a"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="diffuse">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:decimal" name="r"/>
+                            <xs:attribute type="xs:decimal" name="g"/>
+                            <xs:attribute type="xs:decimal" name="b"/>
+                            <xs:attribute type="xs:decimal" name="a"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="specular">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:decimal" name="r"/>
+                            <xs:attribute type="xs:decimal" name="g"/>
+                            <xs:attribute type="xs:decimal" name="b"/>
+                            <xs:attribute type="xs:decimal" name="a"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="shininess">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:decimal" name="value"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="texture" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="file"/>
+                            <xs:attribute type="xs:decimal" name="length_s"/>
+                            <xs:attribute type="xs:decimal" name="length_t"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="id"/>
+                </xs:complexType>
+              </xs:element>
+			</xs:choice>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="graph">
+          <xs:complexType>
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+              <xs:element name="node">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="transforms">
+                      <xs:complexType>
+                        <xs:choice minOccurs="0" maxOccurs="unbounded">
+                          <xs:element name="translate">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:decimal" name="x"/>
+                                  <xs:attribute type="xs:decimal" name="y"/>
+                                  <xs:attribute type="xs:decimal" name="z"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="rotate">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="axis"/>
+                                  <xs:attribute type="xs:decimal" name="angle"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="scale">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:decimal" name="x"/>
+                                  <xs:attribute type="xs:decimal" name="y"/>
+                                  <xs:attribute type="xs:decimal" name="z"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:choice>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="appearanceref">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="id"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="children">
+                      <xs:complexType>
+                        <xs:choice minOccurs="1" maxOccurs="unbounded">
+                          <xs:element name="rectangle">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:decimal" name="x1"/>
+                                  <xs:attribute type="xs:decimal" name="y1"/>
+                                  <xs:attribute type="xs:decimal" name="x2"/>
+                                  <xs:attribute type="xs:decimal" name="y2"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="triangle">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:decimal" name="x1"/>
+                                  <xs:attribute type="xs:decimal" name="y1"/>
+                                  <xs:attribute type="xs:decimal" name="z1"/>
+                                  <xs:attribute type="xs:decimal" name="x2"/>
+                                  <xs:attribute type="xs:decimal" name="y2"/>
+                                  <xs:attribute type="xs:decimal" name="z2"/>
+                                  <xs:attribute type="xs:decimal" name="x3"/>
+                                  <xs:attribute type="xs:decimal" name="y3"/>
+                                  <xs:attribute type="xs:decimal" name="z3"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="cylinder">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:decimal" name="base"/>
+                                  <xs:attribute type="xs:decimal" name="top"/>
+                                  <xs:attribute type="xs:decimal" name="height"/>
+                                  <xs:attribute type="xs:integer" name="slices"/>
+                                  <xs:attribute type="xs:integer" name="stacks"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="sphere">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:decimal" name="radius"/>
+                                  <xs:attribute type="xs:integer" name="slices"/>
+                                  <xs:attribute type="xs:integer" name="stacks"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="torus">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:decimal" name="inner"/>
+                                  <xs:attribute type="xs:decimal" name="outer"/>
+                                  <xs:attribute type="xs:integer" name="slices"/>
+                                  <xs:attribute type="xs:integer" name="loops"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="noderef">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="id"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:choice>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="id"/>
+                </xs:complexType>
+              </xs:element>
+			  </xs:choice>
+            <xs:attribute type="xs:string" name="rootid"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
