@@ -1,0 +1,13 @@
+(934939823) miguel rossi seabra:
+----parse com tinyXML
+----integrar com CFGlib
+
+(911134479) paulo silva:
+----class:
+		primitvas
+		appearences
+		lighting
+		cameras
+		globals
+		scenegraph -> node
+	
