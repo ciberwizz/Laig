@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>lsf_parser</name>
+	<name>LAIG</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -24,4 +24,16 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>.cproject</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/.cproject</locationURI>
+		</link>
+		<link>
+			<name>.project</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/.project</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
