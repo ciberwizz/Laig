@@ -48,17 +48,15 @@
        <lights>
             <!-- Deve existir um ou mais blocos "light" -->
            <!-- Os identificadores "id" nao podem ser repetidos -->
-    <light id="primary" enabled="true">
-                <location x="0" y="5" z="0" />
-        <ambient r="1" g="1" b="1" a="0" />
-               <diffuse r="1" g="1" b="1" a="0" />
-
-<specular r="1" g="1" b="1" a="0" />
-
-               <!-- No caso de uma ser uma spotlight, incluir os dados abaixo; se for uma omnilight, omitir -->
-        <spot angle="45" exponent="2" dirx="45" diry="45" dirz="45" />
-       </light>
-    </lights>
+		    <light id="primary" enabled="true">
+		        <location x="0" y="5" z="0" />
+		        <ambient r="1" g="1" b="1" a="0" />
+		        <diffuse r="1" g="1" b="1" a="0" />	
+				<specular r="1" g="1" b="1" a="0" />	
+		        <!-- No caso de uma ser uma spotlight, incluir os dados abaixo; se for uma omnilight, omitir -->
+	        	<spot angle="45" exponent="2" dirx="45" diry="45" dirz="45" />
+	       </light>
+	    </lights>
 
 </lighting>
 
@@ -78,11 +76,11 @@
         </appearance>
     </appearances>
 
-    <!-- informacao do grafo; "rootid" identifica o no de raiz -->
-   <graph rootid="ss">
+<!-- informacao do grafo; "rootid" identifica o no de raiz -->
+<graph rootid="ss">
 
  
-<node id="sphere">
+	<node id="sphere">
            <transforms>
                <translate x="1" y="0" z="0" />
                <rotate axis="xx" angle="0" />
@@ -92,11 +90,11 @@
            <appearanceref id="ss" />
            <children>            
 
-    <sphere radius="1" slices="1" stacks="2" />
+    			<sphere radius="1" slices="1" stacks="2" />
            </children>
-       </node>
+   </node>
 
-<node id="cylinder">
+	<node id="cylinder">
            <transforms>
                <translate x="2" y="0" z="0" />
                <rotate axis="xx" angle="00" />
@@ -106,11 +104,11 @@
            <appearanceref id="ss" />
            <children>            
 
-    <cylinder base="1" top="1" height="1" slices="2" stacks="2" />
+    			<cylinder base="1" top="1" height="1" slices="2" stacks="2" />
            </children>
-       </node>
+    </node>
 
-<node id="torus">
+	<node id="torus">
            <transforms>
                <translate x="1" y="0" z="2" />
                <rotate axis="xx" angle="0" />
@@ -120,9 +118,9 @@
            <appearanceref id="ss" />
            <children>            
 
-    <torus inner="0.5" outer="1" slices="2" loops="10" />
+    			<torus inner="0.5" outer="1" slices="2" loops="10" />
            </children>
-       </node>
+    </node>
 
 
 
