@@ -228,8 +228,27 @@ ElemContainers* LSFScene::getElemContainers(TiXmlElement* te, bool filter=false)
 BigElemContainers* LSFScene::getBigElemContainers(TiXmlElement* te){
 	BigElemContainers *belcs = new BigElemContainers();
 
+	for(; te != NULL; te = te->NextSiblingElement()){
 
-	return NULL;
+		bigElementContainer* belc = new bigElementContainer;
+
+	
+		belc->root = getElem(te);
+
+		belc->elems = getElems(te,true);
+		belc->elemCs = getElemContainers(te,true);
+
+		belcs.push_back(belc);
+
+
+	}
+
+	if(belcs->size() >0)
+		return belcs;
+	else {
+		delete belcs;
+		return NULL;
+	}
 
 }
 
