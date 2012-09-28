@@ -1,12 +1,10 @@
-            <!-- ii: valor inteiro -->
+    <!-- ii: valor inteiro -->
     <!-- ff: valor em vírgula-flutuante -->
     <!-- ss: string -->
     <!-- ee: caracter "x" ou "y" ou "z", especificando um eixo -->
     <!-- tt: valor Booleano na forma "true" ou "false" -->
 
-
 <lsf>
-
     <!-- configuracoes globais -->
     <globals>
 
@@ -40,7 +38,6 @@
     </cameras>
  
 
-
    <lighting doublesided="false" local="true" enabled="true" >
 
        <ambient r="1" g="1" b="1" a="0" />
@@ -48,14 +45,24 @@
        <lights>
             <!-- Deve existir um ou mais blocos "light" -->
            <!-- Os identificadores "id" nao podem ser repetidos -->
-		    <light id="primary" enabled="true">
+		<light id="primary" enabled="true">
 		        <location x="0" y="5" z="0" />
 		        <ambient r="1" g="1" b="1" a="0" />
 		        <diffuse r="1" g="1" b="1" a="0" />	
 				<specular r="1" g="1" b="1" a="0" />	
 		        <!-- No caso de uma ser uma spotlight, incluir os dados abaixo; se for uma omnilight, omitir -->
 	        	<spot angle="45" exponent="2" dirx="45" diry="45" dirz="45" />
-	       </light>
+	        </light>
+
+		<light id="secondary" enabled="true">
+		        <location x="2" y="5" z="1" />
+		        <ambient r="0.8" g="0.7" b="0.7" a="0" />
+		        <diffuse r="0.5" g="0.5" b="0.5" a="0.2" />	
+			<specular r="1" g="1" b="1" a="0" />	
+		        <!-- No caso de uma ser uma spotlight, incluir os dados abaixo; se for uma omnilight, omitir -->
+	        	 <!-- <spot angle="45" exponent="2" dirx="45" diry="45" dirz="45" />  -->
+	        </light>
+
 	    </lights>
 
 </lighting>
@@ -64,94 +71,239 @@
    <appearances>
        <!-- deve existir um ou mais blocos "appearance" -->
        <appearance id="default" >
-           <emissive r="0.2" g="0.9" b="0.9" a="1" />
-           <ambient r="0.5" g="0.5" b="0.5" a="0.7" />
-           <diffuse r="0.7" g="0.7" b="0.3" a="0.8" />
-           <specular r="0" g="0.3" b="0.98" a="1" />
-           <shininess value="0.4" />
+           	<emissive r="0.2" g="0.9" b="0.9" a="1" />
+           	<ambient r="0.5" g="0.5" b="0.5" a="0.7" />
+           	<diffuse r="0.7" g="0.7" b="0.3" a="0.8" />
+           	<specular r="0" g="0.3" b="0.98" a="1" />
+           	<shininess value="0.4" />
 
             <!-- informacao opcional de textura (ver nota no enunciado sobre os parametros length_... -->
-           <texture file="tex.jpg" length_s="1" length_t="1" />
-
+         <!--  <texture file="tex.jpg" length_s="1" length_t="1" /> -->
         </appearance>
+
+	<appearance id="materialXPTO" >
+           	<emissive r="0.2" g="0.5" b="0.5" a="0.5" />
+           	<ambient r="0.3" g="0.3" b="0.3" a="0.7" />
+           	<diffuse r="0.7" g="0.7" b="0.3" a="1" />
+           	<specular r="0.5" g="0.5" b="0.75" a="0.9" />
+           	<shininess value="0.7" />
+	</appearance>
+
     </appearances>
 
 <!-- informacao do grafo; "rootid" identifica o no de raiz -->
-<graph rootid="ss">
+<graph rootid="start">
 
- 
 	<node id="sphere">
-           <transforms>
-               <translate x="1" y="0" z="0" />
-               <rotate axis="xx" angle="0" />
-               <scale x="1" y="1" z="1" />
-           </transforms>
-         
-           <appearanceref id="ss" />
-           <children>            
-
-    			<sphere radius="1" slices="1" stacks="2" />
-           </children>
-   </node>
+		<transforms>
+		       <translate x="1" y="0" z="0" />
+		       <rotate axis="xx" angle="0" />
+		       <scale x="1" y="1" z="1" />
+		   </transforms>
+		   	<appearanceref id="materialXPTO" />
+		   <children>            
+			<sphere radius="1" slices="1" stacks="2" />
+		   </children>
+	</node>
 
 	<node id="cylinder">
-           <transforms>
-               <translate x="2" y="0" z="0" />
-               <rotate axis="xx" angle="00" />
-               <scale x="1" y="1" z="1" />
-           </transforms>
-         
-           <appearanceref id="ss" />
-           <children>            
-
-    			<cylinder base="1" top="1" height="1" slices="2" stacks="2" />
-           </children>
-    </node>
+		<transforms>
+		       <translate x="2" y="0" z="0" />
+		       <rotate axis="xx" angle="00" />
+		       <scale x="1" y="1" z="1" />
+		   </transforms>
+		   	<appearanceref id="materialXPTO" />
+		   <children>            
+			<cylinder base="1" top="1" height="1" slices="2" stacks="2" />
+		   </children>
+	</node>
 
 	<node id="torus">
-           <transforms>
-               <translate x="1" y="0" z="2" />
-               <rotate axis="xx" angle="0" />
-               <scale x="1" y="1" z="1" />
+		<transforms>
+		       <translate x="1" y="0" z="2" />
+		       <rotate axis="xx" angle="0" />
+		       <scale x="1" y="1" z="1" />
+		</transforms>
+		   <appearanceref id="materialXPTO" />
+		<children>            
+		    <torus inner="0.5" outer="1" slices="2" loops="10" />
+		</children>
+	</node>
+
+	<node id="triangle">
+		<transforms>
+		      <translate x="0" y="0" z="2" />
+		      <rotate axis="xx" angle="0" />
+		      <scale x="1" y="1" z="1" />
+		</transforms>
+			<appearanceref id="materialXPTO" />
+		<children>            
+			<triangle x1="0" y1="0" z1="0" x2="1" y2="0" z2="0" x3="0.5" y3="1" z3="0" />
+		</children>
+	</node>
+
+	<node id="rectangle">
+		<transforms>
+		       <translate x="0" y="0" z="1" />
+		       <rotate axis="xx" angle="0" />
+		       <scale x="1" y="1" z="1" />
+		</transforms>
+		   	<appearanceref id="materialXPTO" />
+		<children>            
+			<rectangle x1="0" y1="0" x2="1" y2="1" />
+	 	</children>
+	</node>
+
+	<node id="cube_multi">
+		<transforms>
+		       <translate x="0" y="0" z="0" />
+		       <rotate axis="xx" angle="0" />
+		       <scale x="0.5" y="1" z="0.5" />
+		</transforms>   
+		  	 <appearanceref id="default" />
+		<children>            
+			<noderef id="cube"/>
+			<noderef id="cube2"/>
+			<noderef id="cube3"/>
+		</children>
+	 </node>
+
+	<node id="cube">
+		<transforms>
+		       <translate x="0" y="0" z="1" />
+		       <rotate axis="xx" angle="0" />
+		       <scale x="2" y="2" z="2" />
+		</transforms>   
+		  	 <appearanceref id="default" />
+		<children>            
+			<noderef id="cube_back"/>
+			<noderef id="cube_front"/>
+			<noderef id="cube_top"/>
+			<noderef id="cube_bottom"/>
+			<noderef id="cube_side_left"/>
+			<noderef id="cube_side_right"/>
+		</children>
+	 </node>
+
+	 <node id="cube2">
+		<transforms>
+		       <translate x="1" y="0" z="-1" />
+		       <rotate axis="xx" angle="0" />
+		       <scale x="2" y="2" z="2" />
+		</transforms>   
+		  	 <appearanceref id="default" />
+		<children>            
+			<noderef id="cube_back"/>
+			<noderef id="cube_front"/>
+			<noderef id="cube_top"/>
+			<noderef id="cube_bottom"/>
+			<noderef id="cube_side_left"/>
+			<noderef id="cube_side_right"/>
+		</children>
+	 </node>
+
+	<node id="cube3">
+		<transforms>
+		       <translate x="-1" y="1" z="3" />
+		       <rotate axis="xx" angle="0" />
+		       <scale x="2" y="2" z="2" />
+		</transforms>   
+		  	 <appearanceref id="default" />
+		<children>            
+			<noderef id="cube_back"/>
+			<noderef id="cube_front"/>
+			<noderef id="cube_top"/>
+			<noderef id="cube_bottom"/>
+			<noderef id="cube_side_left"/>
+			<noderef id="cube_side_right"/>
+		</children>
+	 </node>
+
+
+	<node id="cube_face">
+           	<transforms>
+               		<translate x="0" y="0" z="0" />
+               		<rotate axis="xx" angle="0" />
+               		<scale x="1" y="1" z="1" />
            </transforms>
-         
-           <appearanceref id="ss" />
+         	<appearanceref id="default" />
            <children>            
-
-    			<torus inner="0.5" outer="1" slices="2" loops="10" />
-           </children>
-    </node>
-
-
-
-<node id="triangle">
-           <transforms>
-               <translate x="0" y="0" z="2" />
-               <rotate axis="xx" angle="0" />
-               <scale x="1" y="1" z="1" />
-           </transforms>
-         
-           <appearanceref id="ss" />
-           <children>            
-
-<triangle x1="0" y1="0" z1="0" x2="1" y2="0" z2="0" x3="0.5" y3="1" z3="0" />
+		<rectangle x1="0" y1="0" x2="1" y2="1" />
            </children>
        </node>
 
-<node id="rectangle">
+	<node id="cube_back">
+           <transforms>
+               <translate x="-0.5" y="0" z="0" />
+               <rotate axis="yy" angle="180" />
+	       <translate x="0.5" y="0" z="0" />
+               <scale x="1" y="1" z="1" />
+           </transforms>
+         	 <appearanceref id="default" />
+           <children>            
+		<noderef id="cube_face"/>
+           </children>
+       </node>
+
+	<node id="cube_front">
            <transforms>
                <translate x="0" y="0" z="1" />
-               <rotate axis="xx" angle="0" />
+               <rotate axis="yy" angle="0" />
                <scale x="1" y="1" z="1" />
            </transforms>
-         
-           <appearanceref id="ss" />
+  		<appearanceref id="default" />
            <children>            
-
-<rectangle x1="0" y1="0" x2="1" y2="1" />
+		<noderef id="cube_face"/>
            </children>
        </node>
 
+	<node id="cube_side_left">
+           <transforms>
+               <translate x="0" y="0" z="0" />
+               <rotate axis="yy" angle="-90" />
+               <scale x="1" y="1" z="1" />
+           </transforms>
+           	<appearanceref id="default" />
+           <children>            
+		<noderef id="cube_face"/>
+           </children>
+       </node>
+	
+	<node id="cube_side_right">
+           <transforms>
+               <rotate axis="yy" angle="90" />
+ 	       <translate x="1" y="0" z="1" />
+               <scale x="1" y="1" z="1" />
+           </transforms>
+           	<appearanceref id="default" />
+           <children>            
+		<noderef id="cube_face"/>
+           </children>
+       </node>
+
+	<node id="cube_top">
+           <transforms>
+               <rotate axis="xx" angle="-90" />
+ 	       <translate x="0" y="1" z="0.5" />
+               <scale x="1" y="1" z="1" />
+           </transforms>
+           	<appearanceref id="default" />
+           <children>            
+		<noderef id="cube_face"/>
+           </children>
+	</node>
+
+	<node id="cube_bottom">
+           <transforms>
+               <rotate axis="xx" angle="90" />
+ 	       <translate x="0" y="0" z="0.5" />
+               <scale x="1" y="1" z="1" />
+           </transforms>
+           	<appearanceref id="default" />
+           <children>            
+		<noderef id="cube_face"/>
+           </children>
+       </node>
 
     </graph>
 </lsf>
