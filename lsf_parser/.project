@@ -35,5 +35,40 @@
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/.project</locationURI>
 		</link>
+		<link>
+			<name>lib</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>src</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>lib/libTinyXML.a</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/lib/libTinyXML.a</locationURI>
+		</link>
+		<link>
+			<name>src/lsf.lsf</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/src/lsf.lsf</locationURI>
+		</link>
+		<link>
+			<name>src/paser.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/src/paser.cpp</locationURI>
+		</link>
+		<link>
+			<name>src/tinystr.h</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/src/tinystr.h</locationURI>
+		</link>
+		<link>
+			<name>src/tinyxml.h</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/src/tinyxml.h</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>
