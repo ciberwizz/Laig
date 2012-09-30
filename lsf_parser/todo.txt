@@ -10,4 +10,4 @@
 		cameras
 		globals
 		scenegraph -> node
-	
+	g++ -Llib/ -lTinyXML -Isrc/ src/parser.cpp

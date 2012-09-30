@@ -36,18 +36,18 @@ typedef list<bigElemContainer*> BigElemContainers;
 
 class LSFScene {
 private:
-	TiXmlDocument * doc;
-	TiXmlElement * lsfE;
-	TiXmlElement * globalsE;
-	TiXmlElement * camerasE;
-	TiXmlElement * lightingE;
-	TiXmlElement * appearancesE;
-	TiXmlElement * graphE;
+	TiXmlDocument* doc;
+	TiXmlElement* lsfE;
+	TiXmlElement* globalsE;
+	TiXmlElement* camerasE;
+	TiXmlElement* lightingE;
+	TiXmlElement* appearancesE;
+	TiXmlElement* graphE;
 
 	//helper functions
 	elem*  getElem(TiXmlElement*);
-	Elems*  getElems(TiXmlElement*, bool filter=false);
-	ElemContainers* getElemContainers(TiXmlElement*);
+	Elems*  getElems(TiXmlElement*, bool filter);
+	ElemContainers* getElemContainers(TiXmlElement* te, bool filter);
 	BigElemContainers* getBigElemContainers(TiXmlElement*);
 public:
 	//opens opens file and instantiates TiXml*
@@ -148,13 +148,14 @@ elem*  LSFScene::getElem(TiXmlElement* te){
 	elem* el = new elem;
 
 	el->name = te->Value();
+	cout << ">\n<" << el->name;
 
 	el->attr = map<string,string>();
 
 	//save it's attributes
-	TiXmlAttribute* at = te->FirstAttribute();
 	for( TiXmlAttribute* at = te->FirstAttribute() ; at != NULL ; at = at->Next() ) {
 		el->attr[at->Name()] = at->Value();
+		cout << " " <<at->Name() <<"=\"" << el->attr[at->Name()] <<"\"";
 
 	}
 
@@ -230,7 +231,7 @@ BigElemContainers* LSFScene::getBigElemContainers(TiXmlElement* te){
 
 	for(; te != NULL; te = te->NextSiblingElement()){
 
-		bigElementContainer* belc = new bigElementContainer;
+		bigElemContainer* belc = new bigElemContainer;
 
 	
 		belc->root = getElem(te);
@@ -238,7 +239,7 @@ BigElemContainers* LSFScene::getBigElemContainers(TiXmlElement* te){
 		belc->elems = getElems(te,true);
 		belc->elemCs = getElemContainers(te,true);
 
-		belcs.push_back(belc);
+		belcs->push_back(belc);
 
 
 	}
@@ -257,20 +258,7 @@ BigElemContainers* LSFScene::getBigElemContainers(TiXmlElement* te){
 //returns an array of globals and their attributes
 Elems* LSFScene::getGlobals(){
 
-	Elems* els= new Elems();
-	elem* el;
-
-	TiXmlElement* chld = this->globalsE->FirstChildElement();
-	if(chld == NULL)
-		return NULL;
-
-	do {
-		el = getElem(chld);
-		//save in the list to return
-		els->push_back(el);
-
-	//goes to the next sibling, if null breaks.
-	}while( (chld = chld->NextSiblingElement())!= NULL );
+	Elems* els= getElems( this->globalsE->FirstChildElement());
 
 
 	return els;
@@ -279,7 +267,7 @@ Elems* LSFScene::getGlobals(){
 //returns an array of cameras
 	//if a camera is perpective then childelements will be
 	//converted to attr. ex: elem->attr["fromx"] ...
-Elems* LSFScene::getCameras(){
+BigElemContainers* LSFScene::getCameras(){
 	return NULL;
 }
 
