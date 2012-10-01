@@ -86,8 +86,10 @@ public:
 int main(){
 
 	LSFScene a = LSFScene("lsf.lsf");
-
+	//teste getElems
 	a.getGlobals();
+	//teste getElemContainers
+	a.getAppearences();
 
 
 
@@ -285,7 +287,9 @@ ElemContainers* LSFScene::getLights(){
 
 //returns an array of appearances each with their own elems
 ElemContainers* LSFScene::getAppearences(){
-	return NULL;
+	ElemContainers *elcs = getElemContainers(this->appearancesE->FirstChildElement());
+
+	return elcs;
 }
 
 //returns the graph's root id node
