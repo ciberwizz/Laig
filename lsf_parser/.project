@@ -46,14 +46,14 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>lib/libTinyXML.a</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/lib/libTinyXML.a</locationURI>
-		</link>
-		<link>
 			<name>src/lsf.lsf</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/src/lsf.lsf</locationURI>
+		</link>
+		<link>
+			<name>src/lsf.xsd</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/src/lsf.xsd</locationURI>
 		</link>
 		<link>
 			<name>src/paser.cpp</name>
