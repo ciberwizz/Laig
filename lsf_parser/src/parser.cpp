@@ -1,123 +1,10 @@
-#include <iostream>
-#include <string>
-#include <map>
-#include <list>
-#include <cassert>
-#include "tinyxml.h"
-
-using namespace std;
-
-
-
-typedef struct{
-	string name;
-	map<string,string> attr;
-}elem;
-typedef list<elem*> Elems;
-
-typedef struct {
-	elem* root;
-	Elems* elems;
-
-}elemContainer;
-typedef list<elemContainer*> ElemContainers;
-
-typedef struct {
-	elem* root;
-	Elems* elems;
-	ElemContainers* elemCs;
-
-}bigElemContainer;
-typedef list<bigElemContainer*> BigElemContainers;
-
-
-
-
-
-class LSFScene {
-private:
-	TiXmlDocument* doc;
-	TiXmlElement* lsfE;
-	TiXmlElement* globalsE;
-	TiXmlElement* camerasE;
-	TiXmlElement* lightingE;
-	TiXmlElement* appearancesE;
-	TiXmlElement* graphE;
-
-	//helper functions
-	elem*  getElem(TiXmlElement*);
-	Elems*  getElems(TiXmlElement*, bool filter);
-	ElemContainers* getElemContainers(TiXmlElement* te, bool filter);
-	BigElemContainers* getBigElemContainers(TiXmlElement*);
-public:
-	//opens opens file and instantiates TiXml*
-	LSFScene(string file );
-
-	//returns a list of globals and their attributes
-	Elems* getGlobals();
-
-	//returns a list of cameras
-		//if a camera is perspective then childelements will be
-		//converted to attr. ex: elem->attr["fromx"] ...
-	BigElemContainers* getCameras();
-
-	//returns a list of lighting configurations
-		//elem who's name is "config" refers to the attr of lighting
-		// other elems refer to childless childs expl: <ambient r="1" g="1" b="1" a="0" />
-	Elems* getLightingConfig();
-
-	//returns an array of array elemcontainers identified by an id
-	ElemContainers* getLights();
-
-	//returns an array of appearances each with their own elems
-	ElemContainers* getAppearences();
-
-	//returns the graph's root id node
-	string getGraphRootId();
-
-	//returns array of nodes in graph
-	BigElemContainers* getGraphNodes();
-
-};
-
-
-
-
-int main(){
-
-	LSFScene a = LSFScene("lsf.lsf");
-	//teste getElems
-	a.getGlobals();
-	//teste getElemContainers
-	a.getAppearences();
-
-
-
-
-}
-
-
-
-
-
-/*
-
-	TiXmlDocument * doc;
-	TiXmlElement * lsfE;
-	TiXmlElement * globalsE;
-	TiXmlElement * camerasE;
-	TiXmlElement * lightingE;
-	TiXmlElement * appearancesE;
-	TiXmlElement * graphE;
-*/
+#include "parser.h"
 
 //opens opens file and instanciates TiXml*
-LSFScene::LSFScene(string file ){
+LSFParser::LSFParser(string file ){
 
-	this->doc=new TiXmlDocument( "lsf.lsf");
-	bool loadOkay = doc->LoadFile();
-
-	cout << "loadfile: "<< loadOkay;
+	this->doc=new TiXmlDocument( file.c_str());
+	doc->LoadFile();
 
 	this->lsfE = doc->FirstChildElement();
 	assert(this->lsfE != NULL);
@@ -139,40 +26,31 @@ LSFScene::LSFScene(string file ){
 }
 
 
-//typedef struct{
-//	string name;
-//	map<string,string> attr;
-//}elem;
-//typedef list<elem*> Elems;
-//
-
-elem*  LSFScene::getElem(TiXmlElement* te){
+elem*  LSFParser::getElem(TiXmlElement* te){
 	elem* el = new elem;
 
 	el->name = te->Value();
-	cout << ">\n<" << el->name;
 
 	el->attr = map<string,string>();
 
 	//save it's attributes
-	for( TiXmlAttribute* at = te->FirstAttribute() ; at != NULL ; at = at->Next() ) {
+	for( TiXmlAttribute* at = te->FirstAttribute() ; at != NULL ; at = at->Next() )
 		el->attr[at->Name()] = at->Value();
-		cout << " " <<at->Name() <<"=\"" << el->attr[at->Name()] <<"\"";
-
-	}
 
 	return el;
 }
 
 //returns a list of elements
 	//if filter is true it will skip siblings with childs
-Elems*  LSFScene::getElems(TiXmlElement* te, bool filter=false){
+Elems*  LSFParser::getElems(TiXmlElement* te, bool filter=false){
 	Elems* els =new Elems();
 	while(te!= NULL){
-
 		if(filter)
-			if(!te->NoChildren())
+			if(!te->NoChildren()){
+				te = te->NextSiblingElement();
 				continue;
+			}
+
 
 		els->push_back(getElem(te));
 		te = te->NextSiblingElement();
@@ -186,25 +64,10 @@ Elems*  LSFScene::getElems(TiXmlElement* te, bool filter=false){
 	}
 }
 
-//typedef struct {
-//	elem root;
-//	Elems elems;
-//
-//}elemContainer;
-//typedef list<elemContainer*> ElemContainers;
-//
-//typedef struct {
-//	elem root;
-//	Elems elems;
-//	ElemContainers elemCs;
-//
-//}bigElemContainer;
-//typedef list<bigElemContainer*> BigElemContainers;
-////////////////////////////////////////////////////
 
 //return a list of elemcontainers
 	//if filter is true  then skip childless elements
-ElemContainers* LSFScene::getElemContainers(TiXmlElement* te, bool filter=false){
+ElemContainers* LSFParser::getElemContainers(TiXmlElement* te, bool filter=false){
 	ElemContainers* elcs = new ElemContainers();
 
 	for(; te != NULL; te = te->NextSiblingElement()){
@@ -228,22 +91,17 @@ ElemContainers* LSFScene::getElemContainers(TiXmlElement* te, bool filter=false)
 	}
 }
 
-BigElemContainers* LSFScene::getBigElemContainers(TiXmlElement* te){
+BigElemContainers* LSFParser::getBigElemContainers(TiXmlElement* te){
 	BigElemContainers *belcs = new BigElemContainers();
 
 	for(; te != NULL; te = te->NextSiblingElement()){
-
 		bigElemContainer* belc = new bigElemContainer;
 
-	
 		belc->root = getElem(te);
-
-		belc->elems = getElems(te,true);
-		belc->elemCs = getElemContainers(te,true);
+		belc->elems = getElems(te->FirstChildElement(),true);
+		belc->elemCs = getElemContainers(te->FirstChildElement(),true);
 
 		belcs->push_back(belc);
-
-
 	}
 
 	if(belcs->size() >0)
@@ -258,7 +116,7 @@ BigElemContainers* LSFScene::getBigElemContainers(TiXmlElement* te){
 
 
 //returns an array of globals and their attributes
-Elems* LSFScene::getGlobals(){
+Elems* LSFParser::getGlobals(){
 
 	Elems* els= getElems( this->globalsE->FirstChildElement());
 
@@ -269,37 +127,55 @@ Elems* LSFScene::getGlobals(){
 //returns an array of cameras
 	//if a camera is perpective then childelements will be
 	//converted to attr. ex: elem->attr["fromx"] ...
-BigElemContainers* LSFScene::getCameras(){
-	return NULL;
+bigElemContainer* LSFParser::getCameras(){
+
+	//special case!!!  cannot use getBigElemContainers because it isn't a child
+	bigElemContainer* bgc = new bigElemContainer;
+
+	bgc->root = getElem(this->camerasE);
+	bgc->elems = getElems(this->camerasE->FirstChildElement(),true);
+	bgc->elemCs = getElemContainers(this->camerasE->FirstChildElement(),true);
+
+
+	return bgc;
 }
 
 //returns lighting configurations
 	//elem who's name is "config" refers to the attr of lighting
 	// other elems refer to childless childs expl: <ambient r="1" g="1" b="1" a="0" />
-Elems* LSFScene::getLightingConfig(){
-	return NULL;
+elemContainer* LSFParser::getLightingConfig(){
+	elemContainer* elc = new elemContainer;
+
+	elc->root = getElem(this->lightingE);
+	elc->elems = getElems(this->lightingE->FirstChildElement(),true);
+
+	return elc;
 }
 
 //returns an array of array elemcontainers identified by an id
-ElemContainers* LSFScene::getLights(){
-	return NULL;
+ElemContainers* LSFParser::getLights(){
+	ElemContainers* elcs = getElemContainers(this->lightingE->FirstChildElement("lights")->FirstChildElement());
+	return elcs;
 }
 
 //returns an array of appearances each with their own elems
-ElemContainers* LSFScene::getAppearences(){
+ElemContainers* LSFParser::getAppearences(){
 	ElemContainers *elcs = getElemContainers(this->appearancesE->FirstChildElement());
 
 	return elcs;
 }
 
 //returns the graph's root id node
-string LSFScene::getGraphRootId(){
-	return "";
+string LSFParser::getGraphRootId(){
+	TiXmlAttribute* at = this->graphE->FirstAttribute();
+	string str = at->Value();
+	return str;
 }
 
 //returns array of nodes in graph
-BigElemContainers* LSFScene::getGraphNodes(){
-	return NULL;
+BigElemContainers* LSFParser::getGraphNodes(){
+	BigElemContainers* becs = getBigElemContainers(this->graphE->FirstChildElement());
+	return becs;
 }
 
 
