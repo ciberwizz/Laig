@@ -12,6 +12,7 @@
 #include <string>
 
 using namespace std;
+
 //! Classe Sphere
 /*!
   Criacao de Esferas
@@ -39,25 +40,25 @@ public:
   /*!
    * \return radius
    */
-  double getRadius();
-  int getSlices();
-  int getStacks();
+  double getRadius() const;
+  int getSlices() const;
+  int getStacks() const;
 
-  void setRadius(double r);
-  void setSlices(int sl);
-  void setStacks(int st);
+  void setRadius(double);
+  void setSlices(int);
+  void setStacks(int);
 
-}
+};
 
 
-//! Classe Sphere
+//! Classe Cylinder
 /*!
-  Criacao de Esferas
+  Criacao de Cilindros
  */
 class Cylinder {
 private:
   double baseRadius;
-  double topRadius
+  double topRadius;
   double height;
   int slices;
   int stacks;
@@ -68,19 +69,19 @@ public:
   Cylinder();
   Cylinder(double br, double tr, double ht, int sl, int st);
 
-  double getBaseradius();
-  double getTopradius();
-  double getHeight();
-  int getSlices();
-  int getStacks();
+  double getBaseradius() const;
+  double getTopradius() const;
+  double getHeight() const;
+  int getSlices() const;
+  int getStacks() const;
 
-  void setTopradius(double tr);
-  void setBaseradius(double br);
-  void setHeight(double ht);
-  void setSlices(int sl);
-  void setStacks(int st);
+  void setTopradius(double);
+  void setBaseradius(double);
+  void setHeight(double);
+  void setSlices(int);
+  void setStacks(int);
 
-}
+};
 
 class Rectangle {
 private:
@@ -93,12 +94,17 @@ public:
   Rectangle();
   Rectangle(double x_1, double y_1, double x_2, double y_2);
 
-  void setX1();
-  void setY1();
-  void setX2();
-  void setY2();
+  double getX1() const;
+  double getY1() const;
+  double getX2() const;
+  double getY2() const;
 
-}
+  void setX1(double);
+  void setY1(double);
+  void setX2(double);
+  void setY2(double);
+
+};
 
 class Triangle {
 private:
@@ -106,24 +112,70 @@ private:
 
 public:
   /*!
-   * Construtor Rectangle
+   * Construtor Triangle
    */
-  Rectangle();
-  Rectangle(double x_1, double y_1, double z_1, double x_2, double y_2, double z_2,
-  double x_3, double y_3, double z_3);
+  Triangle();
+  Triangle(double x_1, double y_1, double z_1, double x_2, double y_2, double z_2,
+      double x_3, double y_3, double z_3);
 
-  void setX1();
-  void setY1();
-  void setZ1()
-  void setX2();
-  void setY2();
-  void setZ2();
-  void setX3();
-  void setY3();
-  void setZ3();
+  double getX1() const;
+  double getY1() const;
+  double getZ1() const;
+  double getX2() const;
+  double getY2() const;
+  double getZ2() const;
+  double getX3() const;
+  double getY3() const;
+  double getZ3() const;
 
-}
+  void setX1(double);
+  void setY1(double);
+  void setZ1(double);
+  void setX2(double);
+  void setY2(double);
+  void setZ2(double);
+  void setX3(double);
+  void setY3(double);
+  void setZ3(double);
 
+};
 
+//! Classe Torus
+/*!
+  Criacao de Donuts
+ */
+class Torus {
+private:
+  double innerRadius;
+  double outerRadius;
+  int slices;
+  int loops;
+public:
+  /*!
+   * Construtor Torus
+   */
+  Torus();
+  /*!
+   * Construtor Torus
+   *
+   * \param double inR
+   * \param double outR
+   * \param int sl
+   * \param int lp
+   *
+   */
+  Torus(double inR, double outR, int sl, int lp);
+
+  double getInnerRadius() const;
+  double getOuterRadius() const;
+  int getSlices() const;
+  int getLoops() const;
+
+  void setInnerRadius(double);
+  void setOuterRadius(double);
+  void setSlices(int);
+  void setLoops(int);
+
+};
 
 #endif /* PRIMITIVES_H_ */
