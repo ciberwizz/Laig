@@ -1,13 +1,17 @@
 (934939823) miguel rossi seabra:
-----parse com tinyXML
-----integrar com CFGlib
+----parse com tinyXML ---------done
+
 
 (911134479) paulo silva:
+----integrar com libCFG.a
+
+
+para integrar linkar com:
+
 ----class:
-		primitvas
-		appearences
+		primitvas --> integrar com cgf 
+		appearences 
 		lighting
 		cameras
 		globals
 		scenegraph -> node
-	g++ -Llib/ -lTinyXML -Isrc/ src/parser.cpp
