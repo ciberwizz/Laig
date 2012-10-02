@@ -3,7 +3,8 @@
 #include <map>
 #include <list>
 #include <cassert>
-#include "tinyxml.h"
+#include "tinyXML/tinyxml.h"
+#include "tinyXML/tinystr.h"
 
 using namespace std;
 
@@ -85,7 +86,7 @@ public:
 
 int main(){
 
-	LSFScene a = LSFScene("lsf.lsf");
+	LSFScene a = LSFScene("ster.lsf");
 	//teste getElems
 	a.getGlobals();
 	//teste getElemContainers
@@ -114,7 +115,7 @@ int main(){
 //opens opens file and instanciates TiXml*
 LSFScene::LSFScene(string file ){
 
-	this->doc=new TiXmlDocument( "lsf.lsf");
+	this->doc=new TiXmlDocument( "ster.lsf");
 	bool loadOkay = doc->LoadFile();
 
 	cout << "loadfile: "<< loadOkay;
