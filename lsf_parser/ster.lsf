@@ -95,14 +95,14 @@
 <graph rootid="raiz">
 
 
-		<node id="raiz">
-<transforms>
+	<node id="raiz">
+		<transforms>
 		</transforms>
 			<appearanceref id="default" />
 		<children>
 				<noderef id="table"/>
 		</children>		
-		</node>
+	</node>
 
 	<node id="sphere">
 		<transforms>

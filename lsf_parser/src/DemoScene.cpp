@@ -2,6 +2,8 @@
 #include "cgf/CGFaxis.h"
 #include "cgf/CGFapplication.h"
 #include "primitives.h"
+#include "parser.h"
+
 
 #include <math.h>
 
@@ -32,9 +34,21 @@ void DemoScene::init()
 	 *
 	 */
 	LSFParser a = LSFParser("ster.lsf");
-	a.getGraphNodes(); //necessario filtrar e procurar o SPHERE!!!
+	BigElemContainers* esf = a.getGraphNodes();
+	elem *sph;
+	bool check = true;
+	for(BigElemContainers::iterator it = esf->begin(); it != esf->end() && check; it++)
+		for(ElemContainers::iterator ecit = (*it)->elemCs->begin(); ecit != (*it)->elemCs->end() && check; ecit++ )
+			if((*ecit)->root->name == "children")
+				for(Elems::iterator eit = (*ecit)->elems->begin(); eit != (*ecit)->elems->end() && check; eit++ )
+					if((*eit)->name == "sphere"){
+						obj=new Sphere(*eit);
+						check = false;
+						break;
+					}
 
-	obj=new Sphere();
+
+
 	materialAppearance=new CGFappearance();
 	textureAppearance=new CGFappearance("textures/pyramid.jpg",GL_REPEAT, GL_REPEAT);
 	shader=new CGFshader("shaders/texshader.vert","shaders/texshader.frag");

@@ -6,7 +6,7 @@
  */
 
 #include "primitives.h"
-
+#include <sstream>
 using namespace std;
 
 //ESFERA
@@ -18,9 +18,17 @@ Sphere::Sphere(double r, int sl, int st)
 }
 
 Sphere::Sphere(elem* el){
-	this->radius = el->attr["radius"];
-	this->slices = el->attr["slices"];
-	this->stacks = el->attr["stacks"];
+	stringstream ss;
+
+	ss << el->attr["radius"];
+
+	ss >> this->radius;
+
+	ss << el->attr["slices"];
+	ss >> this->slices;
+
+	ss << el->attr["stacks"];
+	ss >> this->stacks;
 }
 
 double Sphere::getRadius() const
