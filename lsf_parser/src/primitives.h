@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <string>
+#include "cgf/CGFobject.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ using namespace std;
 /*!
   Criacao de Esferas
  */
-class Sphere {
+class Sphere: public CGFobject {
 private:
   double radius;
   int slices;
@@ -26,7 +27,7 @@ public:
   /*!
    * Construtor Sphere
    */
-  Sphere();
+  Sphere(){};
   /*!
    * Construtor Sphere
    *
@@ -48,6 +49,8 @@ public:
   void setSlices(int);
   void setStacks(int);
 
+  void draw();
+
 };
 
 
@@ -55,7 +58,7 @@ public:
 /*!
   Criacao de Cilindros
  */
-class Cylinder {
+class Cylinder: public CGFobject {
 private:
   double baseRadius;
   double topRadius;
@@ -81,9 +84,11 @@ public:
   void setSlices(int);
   void setStacks(int);
 
+  void draw();
+
 };
 
-class Rectangle {
+class Rectangle: public CGFobject {
 private:
   double x1,y1,x2,y2;
 
@@ -104,9 +109,11 @@ public:
   void setX2(double);
   void setY2(double);
 
+  void draw();
+
 };
 
-class Triangle {
+class Triangle: public CGFobject {
 private:
   double x1,y1,z1,x2,y2,z2,x3,y3,z3;
 
@@ -138,13 +145,15 @@ public:
   void setY3(double);
   void setZ3(double);
 
+  void draw();
+
 };
 
 //! Classe Torus
 /*!
   Criacao de Donuts
  */
-class Torus {
+class Torus: public CGFobject {
 private:
   double innerRadius;
   double outerRadius;
@@ -175,6 +184,8 @@ public:
   void setOuterRadius(double);
   void setSlices(int);
   void setLoops(int);
+
+  void draw();
 
 };
 

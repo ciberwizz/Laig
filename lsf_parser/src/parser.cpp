@@ -4,7 +4,7 @@
 LSFParser::LSFParser(string file ){
 
 	this->doc=new TiXmlDocument( file.c_str());
-	doc->LoadFile();
+	this->doc->LoadFile(file.c_str());
 
 	this->lsfE = doc->FirstChildElement();
 	assert(this->lsfE != NULL);
