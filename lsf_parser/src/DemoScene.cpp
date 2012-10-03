@@ -24,6 +24,16 @@ void DemoScene::init()
 	// Defines a default normal
 	glNormal3f(0,0,1);
 
+	/*
+	 *
+	 * CHANGES
+	 *
+	 *
+	 *
+	 */
+	LSFParser a = LSFParser("ster.lsf");
+	a.getGraphNodes(); //necessario filtrar e procurar o SPHERE!!!
+
 	obj=new Sphere();
 	materialAppearance=new CGFappearance();
 	textureAppearance=new CGFappearance("textures/pyramid.jpg",GL_REPEAT, GL_REPEAT);

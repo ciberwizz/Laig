@@ -17,6 +17,12 @@ Sphere::Sphere(double r, int sl, int st)
 	stacks = st;
 }
 
+Sphere::Sphere(elem* el){
+	this->radius = el->attr["radius"];
+	this->slices = el->attr["slices"];
+	this->stacks = el->attr["stacks"];
+}
+
 double Sphere::getRadius() const
 {
 	return radius;

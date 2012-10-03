@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include "cgf/CGFobject.h"
+#include "parser.h"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ public:
    * Construtor Sphere
    */
   Sphere(){};
+
   /*!
    * Construtor Sphere
    *
@@ -37,6 +39,13 @@ public:
    *
    */
   Sphere(double r, int sl, int st);
+
+  /*
+   * recebe uma struct elem..
+   */
+  Sphere(elem*);
+
+
   //! Retorna o raio da esfera
   /*!
    * \return radius
