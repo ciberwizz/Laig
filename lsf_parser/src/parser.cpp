@@ -178,7 +178,17 @@ BigElemContainers* LSFParser::getGraphNodes(){
 	return becs;
 }
 
+LSFParser::~LSFParser(){
 
+	delete doc;
+	delete lsfE;
+	delete globalsE;
+	delete camerasE;
+	delete lightingE;
+	delete appearancesE;
+	delete graphE;
+
+}
 
 
 

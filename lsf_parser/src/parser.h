@@ -82,6 +82,9 @@ public:
 	//returns array of nodes in graph
 	BigElemContainers* getGraphNodes();
 
+
+	~LSFParser();
+
 };
 
 

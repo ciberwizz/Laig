@@ -1,17 +1,10 @@
 (934939823) miguel rossi seabra:
-----parse com tinyXML ---------done
-
+LSFParser destructer
+implementar grapho com nodes
 
 (911134479) paulo silva:
-----integrar com libCFG.a
+criar objecctos apartir do parser 
 
 
-para integrar linkar com:
-
-----class:
-		primitvas --> integrar com cgf 
-		appearences 
-		lighting
-		cameras
-		globals
-		scenegraph -> node
+normais dos objectos
+demoscene com o grapho
