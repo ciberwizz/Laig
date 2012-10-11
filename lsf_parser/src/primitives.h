@@ -15,12 +15,20 @@
 
 using namespace std;
 
+//matrix operations
+double* multMatrix(double*, double*);
+double* createMatrixTranslate(double, double, double);
+double* createMatrixScale(double, double, double);
+double* createMatrixRotate(string,double);
+double* createIdentityMatrix(double*);
+
 //! Classe Sphere
 /*!
   Criacao de Esferas
  */
 class Sphere: public CGFobject {
 private:
+	double transformation[16];
   double radius;
   int slices;
   int stacks;
@@ -58,6 +66,11 @@ public:
   void setSlices(int);
   void setStacks(int);
 
+  //transdormation functions
+  void translate(double, double, double);
+  void scale(double, double, double);
+  void rotate(string,double);
+
   void draw();
 
 };
@@ -69,6 +82,7 @@ public:
  */
 class Cylinder: public CGFobject {
 private:
+	double transformation[16];
   double baseRadius;
   double topRadius;
   double height;
@@ -93,12 +107,18 @@ public:
   void setSlices(int);
   void setStacks(int);
 
+  //transdormation functions
+  void translate(double, double, double);
+  void scale(double, double, double);
+  void rotate(string,double);
+
   void draw();
 
 };
 
 class Rectangle: public CGFobject {
 private:
+	double transformation[16];
   double x1,y1,x2,y2;
 
 public:
@@ -118,12 +138,18 @@ public:
   void setX2(double);
   void setY2(double);
 
+  //transdormation functions
+  void translate(double, double, double);
+  void scale(double, double, double);
+  void rotate(string,double);
+
   void draw();
 
 };
 
 class Triangle: public CGFobject {
 private:
+	double transformation[16];
   double x1,y1,z1,x2,y2,z2,x3,y3,z3;
 
 public:
@@ -154,6 +180,11 @@ public:
   void setY3(double);
   void setZ3(double);
 
+  //transdormation functions
+  void translate(double, double, double);
+  void scale(double, double, double);
+  void rotate(string,double);
+
   void draw();
 
 };
@@ -164,6 +195,7 @@ public:
  */
 class Torus: public CGFobject {
 private:
+	double transformation[16];
   double innerRadius;
   double outerRadius;
   int slices;
@@ -193,6 +225,11 @@ public:
   void setOuterRadius(double);
   void setSlices(int);
   void setLoops(int);
+
+  //transdormation functions
+  void translate(double, double, double);
+  void scale(double, double, double);
+  void rotate(string,double);
 
   void draw();
 

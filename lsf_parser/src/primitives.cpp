@@ -6,8 +6,149 @@
  */
 
 #include "primitives.h"
+#include <cmath>
 #include <sstream>
 using namespace std;
+
+
+
+double* multMatrix(double* m1, double* m2){
+	double *mf = new double[16];
+
+
+	for(int i=0; i< 4; i++){
+		for(int j = 0; j < 4; j++)
+			mf[i+j*4] = m1[i]*m2[0+j*4] + m1[i+4]*m2[1+j*4] + m1[i+2*4]*m2[2+j*4] + m1[i+3*4]*m2[3+j*4];
+	}
+
+	for(int j = 0; j < 16 ; j++)
+		m1[j] = mf[j];
+
+	return m1;
+
+}
+
+double* createMatrixTranslate(double x, double y, double z){
+	double *mat = new double[16];
+	for( int i = 0 ; i < 16; i++){
+		if( i%5 == 0)
+			mat[i] = 1;
+		else
+			switch(i) {
+			case 12:
+				mat[i] = x;
+				break;
+			case 13:
+				mat[i] = y;
+				break;
+			case 14:
+				mat[i] = z;
+				break;
+			default:
+				mat[i]=0.0;
+				break;
+			}
+	}
+
+	return mat;
+
+}
+
+double* createMatrixScale(double x, double y, double z){
+	double *mat = new double[16];
+	for( int i = 0 ; i < 16; i++){
+
+		switch(i) {
+		case 0:
+			mat[i] = x;
+			break;
+		case 5:
+			mat[i] = y;
+			break;
+		case 10:
+			mat[i] = z;
+			break;
+		case 15:
+			mat[i] = 1.0;
+			break;
+		default:
+			mat[i]=0.0;
+			break;
+		}
+	}
+
+	return mat;
+
+}
+
+
+double* createMatrixRotate(string eixo,double rot){
+	//M_PI -  180
+	//x    -   ang
+	double rad = M_PI*rot/180;
+	double *mat = new double[16];
+	for( int i = 0 ; i < 16; i++){
+		if( i%5 == 0)
+			mat[i] = 1.0;
+		else
+			mat[i]=0.0;
+	}
+
+	switch(eixo[0]) {
+	case 'x':
+		/*
+		 * 1 0 0 0
+		 * 0 cos(rad) -sin(rad) 0
+		 * 0 sin(rad) cos(rad) 0
+		 * 0 0 0 1
+		 */
+
+		mat[5] = cos(rad);
+		mat[6] = sin(rad);
+		mat[9] = -sin(rad);
+		mat[10] = cos(rad);
+		break;
+	case 'y':
+		/*
+		 * cos(rad) 0 sin(rad) 0
+		 * 0 1 0 0
+		 * -sin(rad) 0 cos(rad) 0
+		 * 0 0 0 1
+		 */
+
+		mat[0] = cos(rad);
+		mat[2] = -sin(rad);
+		mat[8] = sin(rad);
+		mat[10] = cos(rad);
+		break;
+	case 'z':
+		/*
+		 * cos(rad) -sin(rad) 0 0
+		 * sin(rad) cos(rad) 0 0
+		 * 0 0 1 0 0
+		 * 0 0 0 0 1
+		 */
+
+		mat[0] = cos(rad);
+		mat[1] = sin(rad);
+		mat[4] = -sin(rad);
+		mat[5] = cos(rad);
+		break;
+	}
+
+
+	return mat;
+
+}
+
+double* createIdentityMatrix(double* mat){
+	for( int i = 0; i < 16 ; i++){
+		mat[i] = (i%5 == 0? 1.0 : 0.0);
+	}
+
+	return mat;
+}
+
 
 //ESFERA
 Sphere::Sphere(double r, int sl, int st)
@@ -15,6 +156,7 @@ Sphere::Sphere(double r, int sl, int st)
 	radius = r;
 	slices = sl;
 	stacks = st;
+	createIdentityMatrix(transformation);
 }
 
 Sphere::Sphere(elem* el){
@@ -60,6 +202,22 @@ void Sphere::setStacks(int st)
 {
 	stacks = st;
 }
+//transdormation functions
+void Sphere::translate(double x, double y, double z){
+	double *mat = createMatrixTranslate(x,y,z);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+void Sphere::scale(double x, double y, double z){
+	double *mat = createMatrixScale(x,y,z);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+void Sphere::rotate(string eixo, double ang){
+ 	double *mat = createMatrixRotate(eixo,ang);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
 
 void Sphere::draw()
 {
@@ -67,6 +225,7 @@ void Sphere::draw()
 	quadratic = gluNewQuadric();
 
 //	glBegin(GL_QUADS);
+	glMultMatrixd(transformation);
 	gluSphere(quadratic, 2, 30, 30);
 //	glEnd();
 }
@@ -79,6 +238,7 @@ Cylinder::Cylinder(double br, double tr, double ht, int sl, int st)
 	height = ht;
 	slices = sl;
 	stacks = st;
+	createIdentityMatrix(transformation);
 }
 
 double Cylinder::getBaseradius() const
@@ -129,9 +289,29 @@ void Cylinder::setStacks(int st)
 	stacks = st;
 }
 
+//transdormation functions
+void Cylinder::translate(double x, double y, double z){
+	double *mat = createMatrixTranslate(x,y,z);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+
+void Cylinder::scale(double x, double y, double z){
+	double *mat = createMatrixScale(x,y,z);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+
+void Cylinder::rotate(string eixo, double ang){
+	double *mat = createMatrixRotate(eixo,ang);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+
 void Cylinder::draw()
 {
 	glBegin(GL_QUADS);
+	glMultMatrixd(transformation);
 
 	glEnd();
 }
@@ -143,6 +323,7 @@ Rectangle::Rectangle(double x_1, double y_1, double x_2, double y_2)
 	x2 = x_2;
 	y1 = y_1;
 	y2 = y_2;
+	createIdentityMatrix(transformation);
 }
 
 double Rectangle::getX1() const
@@ -185,9 +366,30 @@ void Rectangle::setY2(double y_2)
 	y2 = y_2;
 }
 
+//transdormation functions
+void Rectangle::translate(double x, double y, double z){
+	double *mat = createMatrixTranslate(x,y,z);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+
+void Rectangle::scale(double x, double y, double z){
+	double *mat = createMatrixScale(x,y,z);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+
+void Rectangle::rotate(string eixo, double ang){
+	double *mat = createMatrixRotate(eixo,ang);
+	multMatrix( this->transformation, mat);
+	delete mat;
+
+}
+
 void Rectangle::draw()
 {
 	glBegin(GL_QUADS);
+	glMultMatrixd(transformation);
 
 	glEnd();
 }
@@ -205,6 +407,7 @@ Triangle::Triangle(double x_1, double y_1, double z_1, double x_2, double y_2, d
 	z1 = z_1;
 	z2 = z_2;
 	z3 = z_3;
+	createIdentityMatrix(transformation);
 }
 
 double Triangle::getX1() const
@@ -277,9 +480,29 @@ void Triangle::setZ3(double z_3)
 	z3 = z_3;
 }
 
+//transdormation functions
+void Triangle::translate(double x, double y, double z){
+	double *mat = createMatrixTranslate(x,y,z);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+
+void Triangle::scale(double x, double y, double z){
+	double *mat = createMatrixScale(x,y,z);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+
+void Triangle::rotate(string eixo, double ang){
+	double *mat = createMatrixRotate(eixo,ang);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+
 void Triangle::draw()
 {
 	glBegin(GL_QUADS);
+	glMultMatrixd(transformation);
 
 	glEnd();
 }
@@ -290,6 +513,7 @@ Torus::Torus(double inR, double outR, int sl, int lp)
 	outerRadius = outR;
 	slices = sl;
 	loops = lp;
+	createIdentityMatrix(transformation);
 }
 
 double Torus::getInnerRadius() const
@@ -332,9 +556,29 @@ void Torus::setLoops(int lp)
 	loops = lp;
 }
 
+//transdormation functions
+void Torus::translate(double x, double y, double z){
+	double *mat = createMatrixTranslate(x,y,z);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+
+void Torus::scale(double x, double y, double z){
+	double *mat = createMatrixScale(x,y,z);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+
+void Torus::rotate(string eixo, double ang){
+	double *mat = createMatrixRotate(eixo,ang);
+	multMatrix( this->transformation, mat);
+	delete mat;
+}
+
 void Torus::draw()
 {
 	glBegin(GL_QUADS);
+	glMultMatrixd(transformation);
 
 	glEnd();
 }
