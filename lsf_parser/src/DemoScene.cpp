@@ -33,7 +33,7 @@ void DemoScene::init()
 	 *
 	 *
 	 */
-	LSFParser a = LSFParser("ster.lsf");
+/*	LSFParser a = LSFParser("ster.lsf");
 	BigElemContainers* esf = a.getGraphNodes();
 	elem *sph;
 	bool check = true;
@@ -45,7 +45,7 @@ void DemoScene::init()
 						obj=new Sphere(*eit);
 						check = false;
 						break;
-					}
+					}*/
 
 
 

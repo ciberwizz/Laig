@@ -17,12 +17,18 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.linuxtools.rpm.rpmlint.rpmlintBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.cdt.core.cnature</nature>
 		<nature>org.eclipse.cdt.core.ccnature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.linuxtools.rpm.rpmlint.rpmlintNature</nature>
 	</natures>
 	<linkedResources>
 		<link>
@@ -46,6 +52,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>lib/libTinyXML.a</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/lib/libTinyXML.a</locationURI>
+		</link>
+		<link>
 			<name>src/lsf.lsf</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/src/lsf.lsf</locationURI>
@@ -59,16 +70,6 @@
 			<name>src/paser.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/src/paser.cpp</locationURI>
-		</link>
-		<link>
-			<name>src/tinystr.h</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/src/tinystr.h</locationURI>
-		</link>
-		<link>
-			<name>src/tinyxml.h</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Documents/Trabalho%20de%20laig/lsf_parser/src/tinyxml.h</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
