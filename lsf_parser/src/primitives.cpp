@@ -153,6 +153,7 @@ double* createIdentityMatrix(double* mat){
 //ESFERA
 Sphere::Sphere(double r, int sl, int st)
 {
+
 	radius = r;
 	slices = sl;
 	stacks = st;
@@ -160,47 +161,47 @@ Sphere::Sphere(double r, int sl, int st)
 }
 
 Sphere::Sphere(elem* el){
-	stringstream ss;
+  stringstream ss;
 
-	ss << el->attr["radius"];
+  ss << el->attr["radius"];
 
-	ss >> this->radius;
+  ss >> this->radius;
 
-	ss << el->attr["slices"];
-	ss >> this->slices;
+  ss << el->attr["slices"];
+  ss >> this->slices;
 
-	ss << el->attr["stacks"];
-	ss >> this->stacks;
+  ss << el->attr["stacks"];
+  ss >> this->stacks;
 }
 
 double Sphere::getRadius() const
 {
-	return radius;
+  return radius;
 }
 
 int Sphere::getSlices() const
 {
-	return slices;
+  return slices;
 }
 
 int Sphere::getStacks() const
 {
-	return stacks;
+  return stacks;
 }
 
 void Sphere::setRadius(double r)
 {
-	radius = r;
+  radius = r;
 }
 
 void Sphere::setSlices(int sl)
 {
-	slices = sl;
+  slices = sl;
 }
 
 void Sphere::setStacks(int st)
 {
-	stacks = st;
+  stacks = st;
 }
 //transdormation functions
 void Sphere::translate(double x, double y, double z){
@@ -221,18 +222,20 @@ void Sphere::rotate(string eixo, double ang){
 
 void Sphere::draw()
 {
-	GLUquadricObj *quadratic;               // Storage For Our Quadratic Objects
-	quadratic = gluNewQuadric();
+  GLUquadricObj *quadratic;               // Storage For Our Quadratic Objects
+  quadratic = gluNewQuadric();
 
-//	glBegin(GL_QUADS);
+
 	glMultMatrixd(transformation);
-	gluSphere(quadratic, 2, 30, 30);
-//	glEnd();
+  gluSphere(quadratic, radius, slices, stacks);
+  glEnd();
+
 }
 
 //CILINDRO
 Cylinder::Cylinder(double br, double tr, double ht, int sl, int st)
 {
+
 	baseRadius = br;
 	topRadius = tr;
 	height = ht;
@@ -243,50 +246,50 @@ Cylinder::Cylinder(double br, double tr, double ht, int sl, int st)
 
 double Cylinder::getBaseradius() const
 {
-	return baseRadius;
+  return baseRadius;
 }
 
 double Cylinder::getTopradius() const
 {
-	return topRadius;
+  return topRadius;
 }
 double Cylinder::getHeight() const
 {
-	return height;
+  return height;
 }
 int Cylinder::getSlices() const
 {
-	return slices;
+  return slices;
 }
 
 int Cylinder::getStacks() const
 {
-	return stacks;
+  return stacks;
 }
 
 void Cylinder::setTopradius(double tr)
 {
-	topRadius = tr;
+  topRadius = tr;
 }
 
 void Cylinder::setBaseradius(double br)
 {
-	baseRadius = br;
+  baseRadius = br;
 }
 
 void Cylinder::setHeight(double ht)
 {
-	height = ht;
+  height = ht;
 }
 
 void Cylinder::setSlices(int sl)
 {
-	slices = sl;
+  slices = sl;
 }
 
 void Cylinder::setStacks(int st)
 {
-	stacks = st;
+  stacks = st;
 }
 
 //transdormation functions
@@ -310,15 +313,21 @@ void Cylinder::rotate(string eixo, double ang){
 
 void Cylinder::draw()
 {
-	glBegin(GL_QUADS);
-	glMultMatrixd(transformation);
 
-	glEnd();
+  GLUquadricObj *quadratic;               // Storage For Our Quadratic Objects
+  quadratic = gluNewQuadric();
+
+
+  glBegin(GL_QUADS);
+	glMultMatrixd(transformation);
+  gluCylinder(quadratic, baseRadius, topRadius, height, slices, stacks);
+  glEnd();
 }
 
 //RECTANGULO
 Rectangle::Rectangle(double x_1, double y_1, double x_2, double y_2)
 {
+
 	x1 = x_1;
 	x2 = x_2;
 	y1 = y_1;
@@ -328,42 +337,42 @@ Rectangle::Rectangle(double x_1, double y_1, double x_2, double y_2)
 
 double Rectangle::getX1() const
 {
-	return x1;
+  return x1;
 }
 
 double Rectangle::getX2() const
 {
-	return x2;
+  return x2;
 }
 
 double Rectangle::getY1() const
 {
-	return y1;
+  return y1;
 }
 
 double Rectangle::getY2() const
 {
-	return y2;
+  return y2;
 }
 
 void Rectangle::setX1(double x_1)
 {
-	x1 = x_1;
+  x1 = x_1;
 }
 
 void Rectangle::setX2(double x_2)
 {
-	x2 = x_2;
+  x2 = x_2;
 }
 
 void Rectangle::setY1(double y_1)
 {
-	y1 = y_1;
+  y1 = y_1;
 }
 
 void Rectangle::setY2(double y_2)
 {
-	y2 = y_2;
+  y2 = y_2;
 }
 
 //transdormation functions
@@ -388,16 +397,24 @@ void Rectangle::rotate(string eixo, double ang){
 
 void Rectangle::draw()
 {
-	glBegin(GL_QUADS);
-	glMultMatrixd(transformation);
+  GLUquadricObj *quadratic;               // Storage For Our Quadratic Objects
+  quadratic = gluNewQuadric();
 
-	glEnd();
+
+  glBegin(GL_QUADS);
+	glMultMatrixd(transformation);
+  glVertex3d(x1,y1,0);
+  glVertex3d(x1,y2,0);
+  glVertex3d(x2,y2,0);
+  glVertex3d(x2,y1,0);
+  glEnd();
 }
 
 //TRIANGULO
 Triangle::Triangle(double x_1, double y_1, double z_1, double x_2, double y_2, double z_2,
-		double x_3, double y_3, double z_3)
+    double x_3, double y_3, double z_3)
 {
+
 	x1 = x_1;
 	x2 = x_2;
 	x3 = x_3;
@@ -412,72 +429,72 @@ Triangle::Triangle(double x_1, double y_1, double z_1, double x_2, double y_2, d
 
 double Triangle::getX1() const
 {
-	return x1;
+  return x1;
 }
 
 double Triangle::getX2() const
 {
-	return x2;
+  return x2;
 }
 
 double Triangle::getX3() const
 {
-	return x3;
+  return x3;
 }
 
 double Triangle::getY1() const
 {
-	return y1;
+  return y1;
 }
 
 double Triangle::getY2() const
 {
-	return y2;
+  return y2;
 }
 
 void Triangle::setX1(double x_1)
 {
-	x1 = x_1;
+  x1 = x_1;
 }
 
 void Triangle::setX2(double x_2)
 {
-	x2 = x_2;
+  x2 = x_2;
 }
 
 void Triangle::setX3(double x_3)
 {
-	x3 = x_3;
+  x3 = x_3;
 }
 
 void Triangle::setY1(double y_1)
 {
-	y1 = y_1;
+  y1 = y_1;
 }
 
 void Triangle::setY2(double y_2)
 {
-	y2 = y_2;
+  y2 = y_2;
 }
 
 void Triangle::setY3(double y_3)
 {
-	y3 = y_3;
+  y3 = y_3;
 }
 
 void Triangle::setZ1(double z_1)
 {
-	z1 = z_1;
+  z1 = z_1;
 }
 
 void Triangle::setZ2(double z_2)
 {
-	z2 = z_2;
+  z2 = z_2;
 }
 
 void Triangle::setZ3(double z_3)
 {
-	z3 = z_3;
+  z3 = z_3;
 }
 
 //transdormation functions
@@ -501,14 +518,18 @@ void Triangle::rotate(string eixo, double ang){
 
 void Triangle::draw()
 {
-	glBegin(GL_QUADS);
+  glBegin(GL_QUADS);
 	glMultMatrixd(transformation);
+  glVertex3d(x1,y1,z1);
+  glVertex3d(x2,y2,z2);
+  glVertex3d(x3,y3,z3);
+  glEnd();
 
-	glEnd();
 }
 //TORUS
 Torus::Torus(double inR, double outR, int sl, int lp)
 {
+
 	innerRadius = inR;
 	outerRadius = outR;
 	slices = sl;
@@ -518,42 +539,42 @@ Torus::Torus(double inR, double outR, int sl, int lp)
 
 double Torus::getInnerRadius() const
 {
-	return innerRadius;
+  return innerRadius;
 }
 
 double Torus::getOuterRadius() const
 {
-	return outerRadius;
+  return outerRadius;
 }
 
 int Torus::getSlices() const
 {
-	return slices;
+  return slices;
 }
 
 int Torus::getLoops() const
 {
-	return loops;
+  return loops;
 }
 
 void Torus::setInnerRadius(double inR)
 {
-	innerRadius = inR;
+  innerRadius = inR;
 }
 
 void Torus::setOuterRadius(double outR)
 {
-	outerRadius = outR;
+  outerRadius = outR;
 }
 
 void Torus::setSlices(int sl)
 {
-	slices = sl;
+  slices = sl;
 }
 
 void Torus::setLoops(int lp)
 {
-	loops = lp;
+  loops = lp;
 }
 
 //transdormation functions
@@ -577,8 +598,10 @@ void Torus::rotate(string eixo, double ang){
 
 void Torus::draw()
 {
-	glBegin(GL_QUADS);
-	glMultMatrixd(transformation);
 
-	glEnd();
+  glBegin(GL_QUADS);
+	glMultMatrixd(transformation);
+  glutSolidTorus(innerRadius,outerRadius,slices,loops);
+  glEnd();
+
 }

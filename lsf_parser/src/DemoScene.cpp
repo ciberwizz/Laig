@@ -47,7 +47,7 @@ void DemoScene::init()
 						break;
 					}*/
 
-
+	obj=new Torus(2,4,30,30);
 
 	materialAppearance=new CGFappearance();
 	textureAppearance=new CGFappearance("textures/pyramid.jpg",GL_REPEAT, GL_REPEAT);
@@ -96,7 +96,7 @@ void DemoScene::display()
 	obj->draw();
 
 	// textured object
-
+/*
 	glTranslatef(0,4,0);
 	//textureAppearance->apply();
 	obj->draw();
@@ -106,7 +106,7 @@ void DemoScene::display()
 	glTranslatef(0,4,0);
 	//shader->bind();
 	obj->draw();
-	//shader->unbind();
+	//shader->unbind();*/
 
 
 	// ---- END feature demos
