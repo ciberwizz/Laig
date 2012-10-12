@@ -79,7 +79,29 @@ public:
 	//returns the graph's root id node
 	string getGraphRootId();
 
-	//returns array of nodes in graph
+
+	/*
+	 * structure of each bigElemContainer
+	 *
+	 * bigElemContainer: node
+	 *  |
+	 *  |--elem: root -- name = "node"
+	 *  |         '------ attr: map of attributes = id...
+	 *  |
+	 *  |--Elems: list of childess tags
+	 *  |		|---[i]-- name = appearenceref
+	 *  |		'---[i]-- attr: map of atrributes = if apperatenceref then "id"
+	 *  |
+	 *  |--EleContainers: list of tags with childs
+	 *          |---[i]-- root: name and atributes of the current elemcontainer
+	 *          |            |--name: "transforms" or "children"
+	 *          |            '--attr: usually  empty since transforms and children dont have atrributes
+	 *          |
+	 *          '---[i]-- elems: list transformations or children
+	 *                       |--[j]--name: (if transformations) rotate, translat or scale
+	 *                       |			   (if children) noderef or primitive
+	 *                       '--[j]--attr: atributes
+	 */
 	BigElemContainers* getGraphNodes();
 
 

@@ -1,6 +1,5 @@
 (934939823) miguel rossi seabra:
-LSFParser destructer
-implementar grapho com nodes
+
 
 (911134479) paulo silva:
 criar objecctos apartir do parser 
