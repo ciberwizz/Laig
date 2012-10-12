@@ -16,12 +16,7 @@
 
 using namespace std;
 
-//matrix operations
-double* multMatrix(double*, double*);
-double* createMatrixTranslate(double, double, double);
-double* createMatrixScale(double, double, double);
-double* createMatrixRotate(string,double);
-double* createIdentityMatrix(double*);
+
 
 //! Classe Sphere
 /*!
@@ -29,10 +24,10 @@ double* createIdentityMatrix(double*);
  */
 class Sphere: public CGFobject {
 private:
-	double transformation[16];
   double radius;
   int slices;
   int stacks;
+  GLUquadricObj *quadratic;               // Storage For Our Quadratic Objects
 public:
   /*!
    * Construtor Sphere
@@ -67,11 +62,6 @@ public:
   void setSlices(int);
   void setStacks(int);
 
-  //transdormation functions
-  void translate(double, double, double);
-  void scale(double, double, double);
-  void rotate(string,double);
-
   void draw();
 
 };
@@ -83,18 +73,20 @@ public:
  */
 class Cylinder: public CGFobject {
 private:
-	double transformation[16];
   double baseRadius;
   double topRadius;
   double height;
   int slices;
   int stacks;
+  GLUquadricObj *quadratic;               // Storage For Our Quadratic Objects
+
 public:
   /*!
    * Construtor Cylinder
    */
   Cylinder();
   Cylinder(double br, double tr, double ht, int sl, int st);
+  Cylinder(elem*);
 
   double getBaseradius() const;
   double getTopradius() const;
@@ -108,18 +100,12 @@ public:
   void setSlices(int);
   void setStacks(int);
 
-  //transdormation functions
-  void translate(double, double, double);
-  void scale(double, double, double);
-  void rotate(string,double);
-
   void draw();
 
 };
 
 class Rectangle: public CGFobject {
 private:
-	double transformation[16];
   double x1,y1,x2,y2;
 
 public:
@@ -128,6 +114,7 @@ public:
    */
   Rectangle();
   Rectangle(double x_1, double y_1, double x_2, double y_2);
+  Rectangle(elem*);
 
   double getX1() const;
   double getY1() const;
@@ -139,18 +126,12 @@ public:
   void setX2(double);
   void setY2(double);
 
-  //transdormation functions
-  void translate(double, double, double);
-  void scale(double, double, double);
-  void rotate(string,double);
-
   void draw();
 
 };
 
 class Triangle: public CGFobject {
 private:
-	double transformation[16];
   double x1,y1,z1,x2,y2,z2,x3,y3,z3;
 
 public:
@@ -160,6 +141,7 @@ public:
   Triangle();
   Triangle(double x_1, double y_1, double z_1, double x_2, double y_2, double z_2,
       double x_3, double y_3, double z_3);
+  Triangle(elem*);
 
   double getX1() const;
   double getY1() const;
@@ -181,11 +163,6 @@ public:
   void setY3(double);
   void setZ3(double);
 
-  //transdormation functions
-  void translate(double, double, double);
-  void scale(double, double, double);
-  void rotate(string,double);
-
   void draw();
 
 };
@@ -196,7 +173,6 @@ public:
  */
 class Torus: public CGFobject {
 private:
-	double transformation[16];
   double innerRadius;
   double outerRadius;
   int slices;
@@ -216,6 +192,7 @@ public:
    *
    */
   Torus(double inR, double outR, int sl, int lp);
+  Torus(elem*);
 
   double getInnerRadius() const;
   double getOuterRadius() const;
@@ -226,11 +203,6 @@ public:
   void setOuterRadius(double);
   void setSlices(int);
   void setLoops(int);
-
-  //transdormation functions
-  void translate(double, double, double);
-  void scale(double, double, double);
-  void rotate(string,double);
 
   void draw();
 
