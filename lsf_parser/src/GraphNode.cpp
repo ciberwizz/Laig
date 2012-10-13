@@ -58,7 +58,7 @@ CGFappearance* GraphNode::getMaterial() const{
 }
 
 
-//transdormation functions
+//transformation functions
 void GraphNode::translate(double x, double y, double z){
 	double *mat = createMatrixTranslate(x,y,z);
 	multMatrix( this->transformations, mat);

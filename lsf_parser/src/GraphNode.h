@@ -34,7 +34,7 @@ public:
 	CGFappearance* getTex() const;
 	CGFappearance* getMaterial() const;
 
-	//transdormation functions
+	//transformation functions
 	void translate(double, double, double);
 	void scale(double, double, double);
 	void rotate(string,double);

@@ -42,9 +42,9 @@ int main(int argc, char*argv[]){
   BigElemContainers* cena = a.getGraphNodes();
   bool check = true;
   string ID = "table";
-  Graph g;
+  Graph *g;
 
-  g.getGraph(cena, check, ID);
+ g->getGraph(cena,check, ID);
 
 
   CGFapplication app = CGFapplication();
