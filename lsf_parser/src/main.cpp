@@ -5,7 +5,6 @@
 #include <exception>
 
 #include "cgf/CGFapplication.h"
-#include "TPscene.h"
 #include "DemoScene.h"
 
 using namespace std;
