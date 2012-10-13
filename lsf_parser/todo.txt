@@ -1,5 +1,14 @@
 (934939823) miguel rossi seabra:
-normal dos glut stuff ver
+cameras
+scene
+	insert:
+		lights
+		cameras
+		graph
+from main to:
+	appearences
+	lights
+	globals (scene)
 
 (911134479) paulo silva:
 criar objecctos apartir do parser 

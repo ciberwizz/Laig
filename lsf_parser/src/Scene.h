@@ -7,6 +7,17 @@
 
 class Scene : public CGFscene
 {
+private:
+	//light
+	float ambient[4];
+	//polygon
+	string polygMode;
+	string polygShading;
+	//culling
+	string frontFaceOrder;
+	string cullFace;
+	bool cullEnabled;
+
 public:
 	Scene(Elems*);
 	void init();

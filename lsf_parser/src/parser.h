@@ -89,7 +89,7 @@ public:
 	 *  |         '------ attr: map of attributes = id...
 	 *  |
 	 *  |--Elems: list of childess tags
-	 *  |		|---[i]-- name = appearenceref
+	 *  |		|---[i]-- name = appearenceref or transforms if it's childless
 	 *  |		'---[i]-- attr: map of atrributes = if apperatenceref then "id"
 	 *  |
 	 *  |--EleContainers: list of tags with childs
