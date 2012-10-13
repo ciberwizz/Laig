@@ -215,16 +215,14 @@ void Rectangle::setY2(double y_2)
 
 void Rectangle::draw()
 {
-	double normal[3];
-
 	//normal is the same for all
 		//a = [x1,y1,0], b = [x1,y2,0], c = [x2,y1,0]
 		//ab = {0, y2-y1, 0};
 		//ac = {x2 - x1, 0, 0};
 		//normal = ab X ac
-	normal[0] = 0;
-	normal[1] = 0;
-	normal[2] = -(y2-y1)*(x2-x1);
+
+	double normal[] = {0 ,0 , -(y2-y1)*(x2-x1)};
+
 	//normalize
 	normal[2] /= sqrt(normal[2]*normal[2]);
 
