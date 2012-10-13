@@ -18,8 +18,30 @@
 
 class Graph
 {
+private:
+	list<GraphNode*> nodes;
+	GraphNode *root;
+	list<CGFappearance*> appearances;
+	list<CGFobject*> objects;
+	//map<id_grpah, appearence_id>
+	//map< id_node, list<node_ref> >
 public:
-  Graph(){};
+	Graph();
+  /*
+   * run through elements
+   * 	create graphnode
+   * 	if elemnt nAMe is Id then is root!
+   * 	put id in node
+   * 	set transformations
+   * 	set appeeareref map
+   * 	run through child
+   * 		if noderef then add to map
+   * 		else -primitive- create CGFobj and set to node and list
+   * 	push to nodes
+   *
+   * copy noderef* to each graph node
+   *
+   */
   void getGraph(BigElemContainers* bec, bool check, string ID);
   virtual ~Graph(){};
 };
