@@ -5,5 +5,5 @@ normal dos glut stuff ver
 criar objecctos apartir do parser 
 
 
-normais dos objectos
+normais dos objectos - done?
 demoscene com o grapho
