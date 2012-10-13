@@ -1,9 +1,3 @@
-/*
- * primitives.cpp
- *
- *  Created on: Sep 26, 2012
- *      Author: ei06054
- */
 
 #include "primitives.h"
 #include <sstream>
@@ -226,7 +220,9 @@ void Rectangle::draw()
 		//ab = {0, y2-y1, 0};
 		//ac = {x2 - x1, 0, 0};
 		//normal = ab X ac
+
 	double normal[] = {0 ,0 , -(y2-y1)*(x2-x1)};
+
 	//normalize
 	normal[2] /= sqrt(normal[2]*normal[2]);
 
