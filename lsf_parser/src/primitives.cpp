@@ -71,6 +71,8 @@ void Sphere::setStacks(int st)
 
 void Sphere::draw()
 {
+    gluQuadricTexture(quadratic, GL_TRUE);      // Create Texture Coords
+    gluQuadricNormals(quadratic, GLU_SMOOTH);   // Create Smooth Normals
 	gluSphere(quadratic, radius, slices, stacks);
 }
 
@@ -149,8 +151,8 @@ void Cylinder::setStacks(int st)
 
 void Cylinder::draw()
 {
-
-
+	gluQuadricTexture(quadratic, GL_TRUE);      // Create Texture Coords
+	gluQuadricNormals(quadratic, GLU_SMOOTH);   // Create Smooth Normals
 	gluCylinder(quadratic, baseRadius, topRadius, height, slices, stacks);
 }
 
@@ -218,11 +220,25 @@ void Rectangle::setY2(double y_2)
 
 void Rectangle::draw()
 {
+	double normal[3];
+
+	//normal is the same for all
+		//a = [x1,y1,0], b = [x1,y2,0], c = [x2,y1,0]
+		//ab = {0, y2-y1, 0};
+		//ac = {x2 - x1, 0, 0};
+		//normal = ab X ac
+	normal = {0 ,0 , -(y2-y1)*(x2-x1)};
+	//normalize
+	normal[2] /= sqrt(normal[2]*normal[2]);
+
 	glBegin(GL_QUADS);
-	//TODO normals
+		glNormal3d(normal[0],normal[1],normal[2]);
 		glVertex3d(x1,y1,0);
+		glNormal3d(normal[0],normal[1],normal[2]);
 		glVertex3d(x1,y2,0);
+		glNormal3d(normal[0],normal[1],normal[2]);
 		glVertex3d(x2,y2,0);
+		glNormal3d(normal[0],normal[1],normal[2]);
 		glVertex3d(x2,y1,0);
 	glEnd();
 }
@@ -335,11 +351,29 @@ void Triangle::setZ3(double z_3)
 
 void Triangle::draw()
 {
+	double normal[3];
+
+	//normal is the same for all
+		//a = [x1, y1,z1], b = [x2,y2,z2], c = [x3,y3,z3]
+		//ba = {x1 - x2, y1 - y2, z1 - z2};
+		//bc = {x3 - x2, y3 - y2, z3 - z2};
+		//normal = ab X ac
+	normal[0] = (y3-y2)*(z2-z1) - (z3-z2)*(y1-y2);
+	normal[1] = (z3-z2)*(x1-x2) - (x3-x2)*(z1-z2);
+	normal[2] = (x3-x2)*(y1-y2) - (y3-y2)*(x1-x2);
+	double normalize_factor = sqrt( normal[0]*normal[0] + normal[1]*normal[1] + normal[2]*normal[2]);
+	//normalize
+	normal[0] /= normalize_factor;
+	normal[1] /= normalize_factor;
+	normal[2] /= normalize_factor;
+
 	glBegin(GL_QUADS);
-	//TODO NORMALS
-	glVertex3d(x1,y1,z1);
-	glVertex3d(x2,y2,z2);
-	glVertex3d(x3,y3,z3);
+		glNormal3d(normal[0], normal[1], normal[2]);
+		glVertex3d(x1,y1,z1);
+		glNormal3d(normal[0], normal[1], normal[2]);
+		glVertex3d(x2,y2,z2);
+		glNormal3d(normal[0], normal[1], normal[2]);
+		glVertex3d(x3,y3,z3);
 	glEnd();
 
 }
