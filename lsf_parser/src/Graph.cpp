@@ -16,6 +16,7 @@ Graph::Graph(){
   objects = list<CGFobject*>();
   node_children = map< string, list<string>* >();
   node_appearance = map< string, string >();
+  looks = map<string, appearence*>();
 }
 
 void Graph::getGraph(BigElemContainers* bec, string ID)
@@ -234,8 +235,47 @@ void Graph::populateChildren()
     }
 }
 
+void Graph::setNodeAppearance()
+{
+  map< string, string >::iterator it;
+  map<string, appearence*>::iterator itapp;
+  list<GraphNode*>::iterator itgn;
 
 
+  for(it = node_appearance.begin(); it != node_appearance.end(); it++)
+    {
+      for(itapp = looks.begin(); itapp != looks.end(); itapp++){
+
+          //if node appearance = appearance id
+          if((*it).second == (*itapp).first)
+            {
+              //Search for the node to set
+              for(itgn = nodes.begin(); itgn != nodes.end(); itgn++)
+                {
+                  if((*itgn)->getId() == (*it).first)
+                    {
+                      (*itgn)->setAppearance((*itapp).second);
+                      cout << "Appearance: " << (*itgn)->getAppearance() << endl;
+                    }
+                }
+            }
+
+      }
+
+    }
+}
+
+//Fill looks map
+void Graph::setAppID(ElemContainers* elcs)
+{
+  ElemContainers::iterator it;
+
+  for(it = elcs->begin(); it != elcs->end() ; it++)
+    {
+      looks[(*it)->root->attr["id"]] = new appearence((*it)->elems);
+    }
+  cout << "Looks size: " << looks.size() << endl;
+}
 
 
 

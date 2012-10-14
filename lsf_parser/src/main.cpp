@@ -67,9 +67,12 @@ int main(int argc, char*argv[]){
 	BigElemContainers* cena = a.getGraphNodes();
 	//bool check = true;
 	string ID = a.getGraphRootId();
-	Graph *g = new Graph();
 
-	g->getGraph(cena,ID);
+	Graph *g = new Graph();
+	 g->getGraph(cena,ID);
+	 g->setAppID(a.getAppearences());
+	 g->setNodeAppearance();
+
 	//TODO NOT DRAWING
 	sc.setGraph(g);
 	CGFapplication app = CGFapplication();
@@ -91,7 +94,6 @@ int main(int argc, char*argv[]){
 	}
 
 	return 0;
-
 
 }
 
