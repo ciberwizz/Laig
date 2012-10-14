@@ -20,7 +20,7 @@ int main(int argc, char*argv[]){
    */
 
   cout << "\nTesting how Scene takes globals\n";
-  Scene sc = Scene(a.getGlobals());
+  Scene sc = Scene(a.getGlobals(), a.getLightingConfig());
   cout << "it ate all of them! RUN!!\n";
 
   /*****************************************************************************/
@@ -55,7 +55,6 @@ int main(int argc, char*argv[]){
 	  Light * l = new Light(i++, (*it));
 	  luses[id] = l;
 	  sc.addLight(l);
-	  cout << i << endl;
   }
 
   cout << "Lights Tested!\n";
@@ -72,7 +71,7 @@ int main(int argc, char*argv[]){
 
  g->getGraph(cena,ID);
 
-
+sc.setGraph(g);
   CGFapplication app = CGFapplication();
 
   try {
@@ -93,20 +92,6 @@ int main(int argc, char*argv[]){
 
   return 0;
 
-  //BigElemContainers* esf = a.getGraphNodes();
-  /*
-  BigElemContainers* esf = a.getGraphNodes();
-  elem *sph;
-  bool check = true;
-  for(BigElemContainers::iterator it = esf->begin(); it != esf->end() && check; it++)
-    for(ElemContainers::iterator ecit = (*it)->elemCs->begin(); ecit != (*it)->elemCs->end() && check; ecit++ )
-      if((*ecit)->root->name == "children")
-        for(Elems::iterator eit = (*ecit)->elems->begin(); eit != (*ecit)->elems->end() && check; eit++ )
-          if((*eit)->name == "sphere"){
-              obj=new Sphere(*eit);
-              check = false;
-              break;
-          }*/
 
 }
 

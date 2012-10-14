@@ -9,19 +9,21 @@
 
 #include "cgf/CGFappearance.h"
 
-Scene::Scene(Elems* els):lights(){
-	Elems::iterator it = els->begin();
+Scene::Scene(Elems* globals,elemContainer* lconfig):lights(){
+	Elems::iterator it = globals->begin();
 	cullEnabled = false;
 	graph = NULL;
 
-	for(; it != els->end() ; it++){
+	//GLOBAL STUFF
+
+	for(; it != globals->end() ; it++){
 		if( (*it)->name == "background" ){
 			//<background r="0" g="0" b="0" a="0" />
 			stringstream ss;
-			ss << (*it)->attr["r"]; ss >> ambient[0];
-			ss << (*it)->attr["g"]; ss >> ambient[1];
-			ss << (*it)->attr["b"]; ss >> ambient[2];
-			ss << (*it)->attr["a"]; ss >> ambient[3];
+			ss << (*it)->attr["r"]; ss >> background[0];
+			ss << (*it)->attr["g"]; ss >> background[1];
+			ss << (*it)->attr["b"]; ss >> background[2];
+			ss << (*it)->attr["a"]; ss >> background[3];
 
 		} else if( (*it)->name == "polygon" ){
 	        //<polygon mode="fill" shading="gouraud" />
@@ -39,7 +41,36 @@ Scene::Scene(Elems* els):lights(){
 		delete *it;
 	}
 
-	delete els;
+	delete globals;
+
+	//LIGHTING CONFIG STUFF
+//root	   <lighting doublesided="false" local="true" enabled="true" >
+//	  elems:     <ambient r="1" g="1" b="1" a="0" />
+	if( lconfig->root->attr["doublesided"] == "true" )
+		this->doublesided = true;
+	else
+		this->doublesided = false;
+
+	if( lconfig->root->attr["local"] == "true" )
+		this->local = true;
+	else
+		this->local = false;
+
+	if( lconfig->root->attr["enabled"] == "true" )
+		this->enabled = true;
+	else
+		this->enabled = false;
+
+	for( it = lconfig->elems->begin() ; it != lconfig->elems->end() ; it++ )
+		if((*it)->name == "ambient"){
+			stringstream ss;
+			ss << (*it)->attr["r"]; ss >> this->ambient[0];
+			ss << (*it)->attr["g"]; ss >> this->ambient[1];
+			ss << (*it)->attr["b"]; ss >> this->ambient[2];
+			ss << (*it)->attr["a"]; ss >> this->ambient[3];
+			break;
+		}
+
 }
 
 
@@ -103,10 +134,19 @@ void Scene::init()
 	// Enables lighting computations
 	glEnable(GL_LIGHTING);
 
-	// Sets up some lighting parameters
-	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, CGFlight::background_ambient);  // Define ambient light
-//TODO CHANGE TO LIGHING CONFIG
+	//Lighting Config!!
+	if(this->doublesided)
+		glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+	else
+		glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
+
+	if( this->local)
+		glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+	else
+		glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);
+
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, this->ambient);  // Define ambient light
+
 
 
 	if(polygShading == "gouraud")
@@ -146,12 +186,10 @@ void Scene::display()
 
 	//draw lights: only 8 at the most
 	list<Light *>::iterator light_it = lights.begin();
-	for(int i = 0; (light_it != lights.end()) && (i < 8) ; light_it++)
-		if( (*light_it)->isEnabled() ){
-			(*light_it)->init();
-			(*light_it)->draw();
-			i++;
-		}
+	for(int i = 0; (light_it != lights.end()) && (i < 8) ; light_it++){
+		(*light_it)->draw();
+		i++;
+	}
 
 
 	// Draw axis

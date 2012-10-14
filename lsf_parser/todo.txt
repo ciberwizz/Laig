@@ -7,7 +7,7 @@ scene
 		cameras x
 		graph x
 	draw:
-		lights x 
+		lights - XXXXX WORKING
 		cameras- initial..
 		graph: graph.h missing getRoot...
 		TODO FALTA USAR O AMBIENT LIGHT do lightconfig do parser!!

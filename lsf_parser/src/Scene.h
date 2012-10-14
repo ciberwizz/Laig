@@ -10,8 +10,8 @@
 class Scene : public CGFscene
 {
 private:
-	//light
-	float ambient[4];
+//globals
+	float background[4];
 	//polygon
 	string polygMode;
 	string polygShading;
@@ -20,6 +20,12 @@ private:
 	string cullFace;
 	bool cullEnabled;
 
+//lighting config
+	bool doublesided;
+	bool local;
+	bool enabled;
+	float ambient[4];
+
 	list<Light *> lights;
 	CGFlight* light0;
 
@@ -27,7 +33,8 @@ private:
 
 
 public:
-	Scene(Elems*);
+	//params: globals, lightingconfig
+	Scene(Elems*,elemContainer*);
 	void addLight(Light *);
 	//includes adding cgfobgjects
 	void setGraph(Graph *);
