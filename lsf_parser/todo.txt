@@ -11,9 +11,11 @@ scene
 		cameras- initial..
 		graph: graph.h missing getRoot...
 		
+
+	
 from main to:
-	appearences
-	lights
+	appearences -> tested
+	lights -> tested
 	globals (scene)
 
 (911134479) paulo silva:

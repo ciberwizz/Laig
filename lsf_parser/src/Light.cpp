@@ -77,7 +77,7 @@ Light::Light(unsigned int lightid, elemContainer * elc) {
 
 	}
 
-	delete elc;
+
 
 	//after getting what is needed create the f#$% light
 	this->light = new CGFlight(lightid,pos,direct);
@@ -94,7 +94,7 @@ Light::Light(unsigned int lightid, elemContainer * elc) {
 	this->light->setAmbient(ambient);
 	this->light->setSpecular(specular);
 	this->light->setAngle(angle);
-
+	delete elc;
 	if( (*this->exponent) > 0.0 ) {
 			glLightfv( this->id, GL_SPOT_EXPONENT, this->exponent );
 		}
