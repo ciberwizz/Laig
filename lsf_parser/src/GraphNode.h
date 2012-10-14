@@ -5,7 +5,7 @@
 #include "cgf/CGFappearance.h"
 #include "cgf/CGFobject.h"
 #include <cmath>
-
+#include <iostream>
 
 class GraphNode {
 private:

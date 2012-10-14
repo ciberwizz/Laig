@@ -189,6 +189,8 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
       node_children[n->getId()] = children;
     }
 
+  //Now to populate the world!
+  populateChildren();
 }
 
 GraphNode* Graph::getRoot()

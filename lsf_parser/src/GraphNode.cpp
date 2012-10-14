@@ -74,8 +74,10 @@ void GraphNode::draw(){
 
 		if( this->appear != NULL)
 			this->appear->apply();
+		if(obj != NULL){
+			obj->draw();
 
-		obj->draw();
+		}
 
 		list<GraphNode *>::iterator it;
 		for(it = children.begin() ; it != children.end() ; it++)
