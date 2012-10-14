@@ -79,6 +79,7 @@ private:
   int slices;
   int stacks;
   GLUquadricObj *quadratic;               // Storage For Our Quadratic Objects
+  GLUquadricObj *  quadratic_base;
 
 public:
   /*!

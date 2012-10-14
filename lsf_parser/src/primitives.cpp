@@ -81,6 +81,7 @@ Cylinder::Cylinder(double br, double tr, double ht, int sl, int st)
 	slices = sl;
 	stacks = st;
 	quadratic = gluNewQuadric();
+	quadratic_base = gluNewQuadric();
 
 
 }
@@ -151,7 +152,19 @@ void Cylinder::draw()
 	gluQuadricNormals(quadratic, GLU_SMOOTH);   // Create Smooth Normals
 	gluCylinder(quadratic, baseRadius, topRadius, height, slices, stacks);
 
-	//gluDisk()
+	gluQuadricTexture(quadratic_base, GL_TRUE);      // Create Texture Coords
+	gluQuadricNormals(quadratic_base, GLU_SMOOTH);   // Create Smooth Normals
+	//bottom
+	glPushMatrix();
+		glRotated(180,0,1,0);
+		gluDisk(quadratic_base,0,baseRadius,slices,stacks);
+	glPopMatrix();
+
+	//top
+	glPushMatrix();
+		glTranslated(0,0,height);
+		gluDisk(quadratic_base,0,topRadius,slices,stacks);
+	glPopMatrix();
 }
 
 //RECTANGULO
