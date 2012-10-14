@@ -14,33 +14,10 @@ int main(int argc, char*argv[]){
 
   LSFParser a = LSFParser("ster.lsf");
 
-  //teste getElems
-  cout << "\n---------getGlobals------------";
-  a.getGlobals();
-
-  cout <<"\n\n\n\n\n----------getAppearences--------";
-  //teste getElemContainers
-  a.getAppearences();
-
-  cout <<"\n\n\n\n\n----------getCameras------------";
-  a.getCameras();
-
-  cout <<"\n\n\n\n\n----------getLightingConfig-----";
-  a.getLightingConfig();
-
-  cout <<"\n\n\n\n\n----------getLights-------------";
-  a.getLights();
-
-  cout <<"\n\n\n\n\n ---------graphrouteid " << a.getGraphRootId();
-
-  cout <<"\n\n\n\n\n----------getnodes-------------\n";
-   a.getGraphNodes();
-
-
   //elem *sph;
   BigElemContainers* cena = a.getGraphNodes();
   //bool check = true;
-  string ID = "table";
+  string ID = a.getGraphRootId();
   Graph *g = new Graph();
 
  g->getGraph(cena,ID);
