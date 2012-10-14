@@ -14,6 +14,7 @@ Graph::Graph(){
   root = NULL;
   appearances = list<CGFappearance*>();
   objects = list<CGFobject*>();
+  node_children = map< string, list<string>* >();
 }
 
 void Graph::getGraph(BigElemContainers* bec, string ID)
@@ -24,13 +25,16 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
   //Parse BigElemContainers
   for (BigElemContainers::iterator it = bec->begin(); it != bec->end(); it++)
     {
+      //Create nem Graphnode
       GraphNode * n = new GraphNode();
+
+      //List that will contain the children's Ids
+      list<string> * children = new list<string>();
 
       //Node to be scanned
       string nodeName = (*it)->root->attr["id"];
       n->setId(nodeName);
 
-     //cout << "Scanning Node: " << (*it)->root->attr["id"] << endl;
 
       //Parse ElemContainers
       for (ElemContainers::iterator ecit = (*it)->elemCs->begin();
@@ -123,14 +127,10 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
                 {
                   if((*eit)-> name == "noderef")
                     {
-
-                       //     cout << "Noderef id: " << (*eit)->attr["id"] << endl;
-
-
+                      children->push_back((*eit)->attr["id"]);
                     }
                   else
                     {
-                      //    cout << "Primitive id: " << (*eit)-> name << endl;
 
                       if((*eit)-> name == "sphere")
                         {
@@ -164,21 +164,22 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
               //  cout << "da fuq: " << (*it_elems)-> name << endl;
               if((*it_elems)-> name == "appearanceref")
                 {
-             //   cout << "Atributos: " << (*it_elems)->attr["id"] << endl;
-                //  n->setCGFobject((*it_elems)->attr["id"]);
+                  //   cout << "Atributos: " << (*it_elems)->attr["id"] << endl;
+                  //  n->setCGFobject((*it_elems)->attr["id"]);
                   break;
                 }
             }
 
           i++;
         }
+
+      //Insert Graphnode into nodes list
       nodes.push_back(n);
-      cout << "Node ID: " << n->getId() << endl;
 
       //Create map entry for node
-      node_children[n->getId()] = new list<string>();
-      cout << "passou" << endl;
+      node_children[n->getId()] = children;
     }
+
 }
 
 

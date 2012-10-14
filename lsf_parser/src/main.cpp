@@ -41,7 +41,7 @@ int main(int argc, char*argv[]){
   BigElemContainers* cena = a.getGraphNodes();
   //bool check = true;
   string ID = "table";
-  Graph *g;
+  Graph *g = new Graph();
 
  g->getGraph(cena,ID);
 
