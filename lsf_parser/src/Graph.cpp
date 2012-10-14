@@ -195,5 +195,47 @@ GraphNode* Graph::getRoot()
   return root;
 }
 
+void Graph::populateChildren()
+{
+  map< string, list<string>* >::iterator map_it;
+  list<GraphNode*>::iterator gn;
+  list<GraphNode*>::iterator gnk;
+  list<string>::iterator cit;
+
+  //Go through map node_children
+  for(map_it = node_children.begin(); map_it != node_children.end(); map_it++)
+    {
+      //Find node in graphnode list
+      for(gn=nodes.begin(); gn!=nodes.end(); gn++)
+        {
+          //  cout << "Size: " << nodes.size() << endl;
+          //find node reference in map and add the noderefs to the graphnode children
+          if((*gn)->getId() == map_it->first)
+            {
+              //iterate through the node refs
+              for(cit = map_it->second->begin(); cit != map_it->second->end(); cit++)
+                {
+                  //find the node with the same id as noderef
+                  for(gnk=nodes.begin(); gnk!=nodes.end(); gnk++)
+                    {
+                      if( (*gnk)->getId() == *cit)
+                        {
+                          //add it to the children list
+                          (*gn)->addChild(*gnk);
+                        }
+                      //children = map_it->second;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+
+
+
+
+
 
 

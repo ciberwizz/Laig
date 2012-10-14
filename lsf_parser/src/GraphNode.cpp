@@ -242,3 +242,16 @@ double* createIdentityMatrix(double* mat){
 
 	return mat;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
