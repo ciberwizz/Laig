@@ -4,6 +4,8 @@
 #include "cgf/CGFscene.h"
 #include "cgf/CGFshader.h"
 #include "parser.h"
+#include "Graph.h"
+#include "Light.h"
 
 class Scene : public CGFscene
 {
@@ -18,12 +20,20 @@ private:
 	string cullFace;
 	bool cullEnabled;
 
+	list<Light *> lights;
+
+	Graph *graph;
 public:
 	Scene(Elems*);
+	void addLight(Light *);
+	//includes adding cgfobgjects
+	void setGraph(Graph *);
+	void addCGFcamera(CGFcamera*);
+
 	void init();
 	void display();
 	void update(long t);
-	~Scene();
+	virtual ~Scene();
 private:
 
 };

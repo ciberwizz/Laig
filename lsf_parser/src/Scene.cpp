@@ -4,12 +4,12 @@
 #include "primitives.h"
 #include "parser.h"
 #include <sstream>
-
+#include <list>
 #include <math.h>
 
 #include "cgf/CGFappearance.h"
 
-Scene::Scene(Elems* els){
+Scene::Scene(Elems* els):lights(){
 	Elems::iterator it = els->begin();
 	cullEnabled = false;
 
@@ -40,6 +40,27 @@ Scene::Scene(Elems* els){
 
 	delete els;
 }
+
+
+void Scene::addLight(Light *light){
+	this->lights.push_back(light);
+
+	//TODO maximum of 8 lights active...
+}
+
+//includes adding cgfobgjects
+void Scene::setGraph(Graph* gr){
+	graph = gr;
+}
+
+void Scene::addCGFcamera(CGFcamera* cam){
+	this->scene_cameras.push_back(cam);
+	//TODO set active camera
+}
+
+
+
+
 
 void Scene::init()
 {
@@ -110,6 +131,18 @@ void Scene::display()
 	// Initialize Model-View matrix as identity (no transformation
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	// Apply transformations corresponding to the camera position relative to the origin
+	CGFscene::activeCamera->applyView();
+
+
+	//draw lights: only 8 at the most
+	list<Light *>::iterator light_it = lights.begin();
+	for(int i = 0; (light_it != lights.end()) && (i < 8) ; light_it++)
+		if( (*light_it)->isEnabled() ){
+			(*light_it)->draw();
+			i++;
+		}
 
 
 	// Draw axis
