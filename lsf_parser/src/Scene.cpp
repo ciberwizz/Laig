@@ -115,6 +115,16 @@ void Scene::display()
 	// Draw axis
 	axis.draw();
 
+	//TODO DRAW OBJECTS AND LIGHT AND SHIT
+
+
+
+
+	// We have been drawing in a memory area that is not visible - the back buffer,
+	// while the graphics card is showing the contents of another buffer - the front buffer
+	// glutSwapBuffers() will swap pointers so that the back buffer becomes the front buffer and vice-versa
+	glutSwapBuffers();
+
 }
 
 Scene::~Scene()

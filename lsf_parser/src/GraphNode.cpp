@@ -2,18 +2,16 @@
 
 GraphNode::GraphNode() {
 	obj = NULL;
-	tex = NULL;
-	material = NULL;
+	appear = NULL;
 	this->children = list<GraphNode *>();
 	createIdentityMatrix(transformations);
 
 }
 
-GraphNode::GraphNode(string i, CGFobject * o, CGFappearance * _tex, CGFappearance * m) {
+GraphNode::GraphNode(string i, CGFobject * o, CGFappearance *m) {
 	id = i;
 	obj = o;
-	tex = _tex;
-	material = m;
+	appear = m;
 	this->children = list<GraphNode *>();
 	createIdentityMatrix(transformations);
 }
@@ -42,19 +40,12 @@ list<GraphNode *>::const_iterator GraphNode::getChildIterator(){
 	return children.begin();
 }
 
-void GraphNode::setTex(CGFappearance* t){
-	tex = t;
-}
-void GraphNode::setMaterial(CGFappearance* mat){
-	material = mat;
+void GraphNode::setAppearance(CGFappearance* mat){
+	appear = mat;
 }
 
-CGFappearance* GraphNode::getTex() const{
-	return tex;
-}
-
-CGFappearance* GraphNode::getMaterial() const{
-	return material;
+CGFappearance* GraphNode::getAppearance() const{
+	return appear;
 }
 
 
@@ -76,12 +67,13 @@ void GraphNode::rotate(string eixo, double ang){
 }
 
 void GraphNode::draw(){
-	//TODO
+
 	glPushMatrix();
-		if( this->tex != NULL)
-			this->tex->apply();
-		if( this->material != NULL)
-			this->material->apply();
+
+		glMultMatrixd(this->transformations);
+
+		if( this->appear != NULL)
+			this->appear->apply();
 
 		obj->draw();
 

@@ -12,12 +12,11 @@ private:
 	string id;
 	double transformations[16];
 	CGFobject * obj;
-	CGFappearance * tex;
-	CGFappearance * material;
+	CGFappearance * appear;
 	list<GraphNode *> children;
 public:
 	GraphNode();
-	GraphNode(string, CGFobject * o, CGFappearance * _tex, CGFappearance * m);
+	GraphNode(string, CGFobject * o, CGFappearance * m);
 
 	void setId(string);
 	string getId();
@@ -28,11 +27,9 @@ public:
 	void addChild( GraphNode * g);
 	list<GraphNode *>::const_iterator getChildIterator();
 
-	void setTex(CGFappearance*);
-	void setMaterial(CGFappearance*);
+	void setAppearance(CGFappearance*);
 
-	CGFappearance* getTex() const;
-	CGFappearance* getMaterial() const;
+	CGFappearance* getAppearance() const;
 
 	//transformation functions
 	void translate(double, double, double);
