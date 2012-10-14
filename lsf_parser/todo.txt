@@ -21,6 +21,6 @@ from main to:
 
 (911134479) paulo silva:
 criar objecctos apartir do parser 
-
+	Cylinder falta TOPOS
 
 demoscene com o grapho ->scene.h

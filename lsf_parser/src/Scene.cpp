@@ -162,6 +162,17 @@ void Scene::init()
 		}
 
 
+	/*
+	 * TESTING AREA
+	 */
+
+	this->test = new GraphNode();
+
+	//TODO NOT WORKING
+	//this->test->setCGFobject(new Rectangle(12,12,12,12));
+	//this->test->setCGFobject(new Triangle(10,10,10,10,10,10,10,10,10));
+
+	this->test->setCGFobject(new Torus(5,5,100,100));
 }
 
 void Scene::update(long t)
@@ -197,12 +208,12 @@ void Scene::display()
 
 
 	//TODO DRAW OBJECTS AND SHIT
-//	if(graph != NULL)
-//	{
-//	graph->getRoot()->draw();
-//	}
+	if(graph != NULL)
+	{
+	graph->getRoot()->draw();
+	}
 
-
+	//this->test->draw();
 
 
 	// We have been drawing in a memory area that is not visible - the back buffer,
