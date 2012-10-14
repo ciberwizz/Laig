@@ -16,7 +16,7 @@
 #include "primitives.h"
 #include <string>
 #include <map>
-#include <list>
+#include "appearence.h"
 
 
 
@@ -33,6 +33,8 @@ private:
 	//map<id_grpah, appearence_id>
 	map< string, list<string>* > node_children;
 	map< string, string > node_appearance;
+	map<string, appearence*> looks;
+
 public:
 	Graph();
   /*
@@ -53,6 +55,8 @@ public:
   void getGraph(BigElemContainers* bec,string ID);
   GraphNode* getRoot();
   void populateChildren();
+  void setNodeAppearance();
+  void setAppID(ElemContainers* elcs);
   virtual ~Graph(){};
 };
 
