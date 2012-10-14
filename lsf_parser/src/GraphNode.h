@@ -24,7 +24,7 @@ public:
 	void setCGFobject(CGFobject *);
 	CGFobject* getCGFobject();
 
-	void addChild( GraphNode * g);
+	void addChild(GraphNode * g);
 	list<GraphNode *>::const_iterator getChildIterator();
 
 	void setAppearance(CGFappearance*);

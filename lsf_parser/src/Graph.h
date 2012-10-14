@@ -52,6 +52,7 @@ public:
    */
   void getGraph(BigElemContainers* bec,string ID);
   GraphNode* getRoot();
+  void populateChildren();
   virtual ~Graph(){};
 };
 

@@ -12,6 +12,7 @@
 Scene::Scene(Elems* els):lights(){
 	Elems::iterator it = els->begin();
 	cullEnabled = false;
+	graph = NULL;
 
 	for(; it != els->end() ; it++){
 		if( (*it)->name == "background" ){
@@ -127,7 +128,7 @@ void Scene::update(long t)
 {
 
 }
-	
+
 void Scene::display()
 {
 	// ---- BEGIN Background, camera and axis setup
@@ -156,8 +157,14 @@ void Scene::display()
 	// Draw axis
 	axis.draw();
 
-	//TODO DRAW OBJECTS AND LIGHT AND SHIT
-//light0->draw();
+
+	//TODO DRAW OBJECTS AND SHIT
+//	if(graph != NULL)
+//	{
+//	graph->getRoot()->draw();
+//	}
+
+
 
 
 	// We have been drawing in a memory area that is not visible - the back buffer,
