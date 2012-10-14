@@ -13,6 +13,10 @@
 #include <list>
 #include "cgf/CGFappearance.h"
 #include "cgf/CGFobject.h"
+#include "primitives.h"
+#include <string>
+#include <map>
+#include <list>
 
 
 
@@ -23,8 +27,11 @@ private:
 	GraphNode *root;
 	list<CGFappearance*> appearances;
 	list<CGFobject*> objects;
+
+	//Id Node -> lista dos noderef Ids.... and use the info to add to child in graphnode
+//	void Populate_nodRef(map1)
 	//map<id_grpah, appearence_id>
-	//map< id_node, list<node_ref> >
+	map< string, list<string>* > node_children;
 public:
 	Graph();
   /*
@@ -42,7 +49,7 @@ public:
    * copy noderef* to each graph node
    *
    */
-  void getGraph(BigElemContainers* bec, bool check, string ID);
+  void getGraph(BigElemContainers* bec,string ID);
   virtual ~Graph(){};
 };
 

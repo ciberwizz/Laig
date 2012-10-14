@@ -8,132 +8,180 @@
 #include "Graph.h"
 #include <sstream>
 
-/*	string id;
-	double transformations[16];
-	CGFobject * obj;
-	CGFappearance * tex;
-	CGFappearance * material;
-	list<GraphNode *> children;*/
 
 Graph::Graph(){
-	nodes = list<GraphNode*>();
-	root = NULL;
-	appearances = list<CGFappearance*>();
-	objects = list<CGFobject*>();
+  nodes = list<GraphNode*>();
+  root = NULL;
+  appearances = list<CGFappearance*>();
+  objects = list<CGFobject*>();
 }
 
-void Graph::getGraph(BigElemContainers* bec, bool check, string ID)
+void Graph::getGraph(BigElemContainers* bec, string ID)
 {
-	//Percorre Nos
-	for (BigElemContainers::iterator it = bec->begin(); it != bec->end() && check; it++)
-	{
-		GraphNode * n = new GraphNode();
+  //Creat CGFobject
+  CGFobject * obj = NULL;
+  int i = 0;
+  //Parse BigElemContainers
+  for (BigElemContainers::iterator it = bec->begin(); it != bec->end(); it++)
+    {
+      GraphNode * n = new GraphNode();
 
-		for (ElemContainers::iterator ecit = (*it)->elemCs->begin();
-				ecit != (*it)->elemCs->end() && check; ecit++)
-		{
-			string temp = (*ecit)->root->name;
+      //Node to be scanned
+      string nodeName = (*it)->root->attr["id"];
+      n->setId(nodeName);
 
-			//If ElemContainers is transforms
-			if(temp == "transforms")
-			{
-				for (Elems::iterator eit = (*ecit)->elems->begin();
-						eit != (*ecit)->elems->end() && check; eit++)
-				{
-					//If we want to do a rotation
-					if((*eit)-> name == "rotate")
-					{
-						cout << (*eit)-> name << endl;
-						cout << "Angle: " << (*eit)->attr["angle"] << endl;
-						cout << "Axis: " << (*eit)->attr["axis"] << endl;
+     //cout << "Scanning Node: " << (*it)->root->attr["id"] << endl;
 
-						//Conversion of parameter "angle" from string to int
-						istringstream angle((*eit)->attr["angle"]);
-						int angleInt;
-						angle >> angleInt;
+      //Parse ElemContainers
+      for (ElemContainers::iterator ecit = (*it)->elemCs->begin();
+          ecit != (*it)->elemCs->end(); ecit++)
+        {
+          string temp = (*ecit)->root->name;
 
-						//Do the actual rotation
-						n->rotate((*eit)->attr["axis"], angleInt);
-					}
+          //If ElemContainers is transforms
+          if(temp == "transforms")
+            {
+              for (Elems::iterator eit = (*ecit)->elems->begin();
+                  eit != (*ecit)->elems->end(); eit++)
+                {
+                  //If we want to do a rotation
+                  if((*eit)-> name == "rotate")
+                    {
+                      /*       cout << (*eit)-> name << endl;
+                      cout << "Angle: " << (*eit)->attr["angle"] << endl;
+                      cout << "Axis: " << (*eit)->attr["axis"] << endl;*/
 
-					//If we want to do a translation
-					if((*eit)-> name == "translate")
-					{
-						cout << (*eit)-> name << endl;
-						cout << "X: " << (*eit)->attr["x"] << endl;
-						cout << "Y: " << (*eit)->attr["y"] << endl;
-						cout << "z: " << (*eit)->attr["z"] << endl;
+                      //Conversion of parameter "angle" from string to int
+                      istringstream angle((*eit)->attr["angle"]);
+                      int angleInt;
+                      angle >> angleInt;
 
-						//Conversion of parameters
-						stringstream x1;
-						double X;
-						x1 << (*eit)->attr["x"];
-						x1 >> X;
+                      //Do the actual rotation
+                      n->rotate((*eit)->attr["axis"], angleInt);
+                    }
 
-						stringstream y1;
-						double Y;
-						y1 << (*eit)->attr["y"];
-						y1 >> Y;
+                  //If we want to do a translation
+                  if((*eit)-> name == "translate")
+                    {
+                      /*     cout << (*eit)-> name << endl;
+                      cout << "X: " << (*eit)->attr["x"] << endl;
+                      cout << "Y: " << (*eit)->attr["y"] << endl;
+                      cout << "z: " << (*eit)->attr["z"] << endl;*/
 
-						stringstream z1;
-						double Z;
-						z1 << (*eit)->attr["z"];
-						z1 >> Z;
+                      //Conversion of parameters
+                      stringstream x1;
+                      double X;
+                      x1 << (*eit)->attr["x"];
+                      x1 >> X;
 
-						//Do the actual translation
-						n->translate(X,Y,Z);
-					}
-					//If we want to scale the object
-					if((*eit)-> name == "scale")
-					{
-						cout << (*eit)-> name << endl;
-						cout << "X: " << (*eit)->attr["x"] << endl;
-						cout << "Y: " << (*eit)->attr["y"] << endl;
-						cout << "z: " << (*eit)->attr["z"] << endl;
+                      stringstream y1;
+                      double Y;
+                      y1 << (*eit)->attr["y"];
+                      y1 >> Y;
 
-						//Conversion of parameters
-						stringstream x1;
-						double X;
-						x1 << (*eit)->attr["x"];
-						x1 >> X;
+                      stringstream z1;
+                      double Z;
+                      z1 << (*eit)->attr["z"];
+                      z1 >> Z;
 
-						stringstream y1;
-						double Y;
-						y1 << (*eit)->attr["y"];
-						y1 >> Y;
+                      //Do the actual translation
+                      n->translate(X,Y,Z);
+                    }
+                  //If we want to scale the object
+                  if((*eit)-> name == "scale")
+                    {/*
+                      cout << (*eit)-> name << endl;
+                      cout << "X: " << (*eit)->attr["x"] << endl;
+                      cout << "Y: " << (*eit)->attr["y"] << endl;
+                      cout << "z: " << (*eit)->attr["z"] << endl;*/
 
-						stringstream z1;
-						double Z;
-						z1 << (*eit)->attr["z"];
-						z1 >> Z;
+                      //Conversion of parameters
+                      stringstream x1;
+                      double X;
+                      x1 << (*eit)->attr["x"];
+                      x1 >> X;
 
-						//Do the actual translation
-						n->scale(X,Y,Z);
-					}
-				}
-			}
+                      stringstream y1;
+                      double Y;
+                      y1 << (*eit)->attr["y"];
+                      y1 >> Y;
+
+                      stringstream z1;
+                      double Z;
+                      z1 << (*eit)->attr["z"];
+                      z1 >> Z;
+
+                      //Do the actual translation
+                      n->scale(X,Y,Z);
+                    }
+                }
+            }
+          else
+            {
+              for (Elems::iterator eit = (*ecit)->elems->begin();
+                  eit != (*ecit)->elems->end(); eit++)
+                {
+                  if((*eit)-> name == "noderef")
+                    {
+
+                       //     cout << "Noderef id: " << (*eit)->attr["id"] << endl;
 
 
+                    }
+                  else
+                    {
+                      //    cout << "Primitive id: " << (*eit)-> name << endl;
 
-			/*
-					//Listar os putos
-					for (Elems::iterator eit = (*ecit)->elems->begin();
-							eit != (*ecit)->elems->end() && check; eit++)
-					{
-						//Adidionar puto a lista de putos
-						GraphNode *child = new GraphNode();
-						child->setId((*eit)->attr["id"]);*/
+                      if((*eit)-> name == "sphere")
+                        {
+                          obj = new Sphere((*eit));
+                        }
+                      if((*eit)-> name == "cylinder")
+                        {
+                          obj = new Sphere((*eit));
+                        }
+                      if((*eit)-> name == "torus")
+                        {
+                          obj = new Sphere((*eit));
+                        }
+                      if((*eit)-> name == "triangle")
+                        {
+                          obj = new Sphere((*eit));
+                        }
+                      if((*eit)-> name == "rectangle")
+                        {
+                          obj = new Sphere((*eit));
+                        }
+                    }
+                  //Set the GraphNode object
+                  n->setCGFobject(obj);
+                }
+            }
 
+          //Run through Childless elements
+          for (Elems::iterator it_elems = (*it)->elems->begin(); it_elems != (*it)->elems->end(); it_elems++)
+            {
+              //  cout << "da fuq: " << (*it_elems)-> name << endl;
+              if((*it_elems)-> name == "appearanceref")
+                {
+             //   cout << "Atributos: " << (*it_elems)->attr["id"] << endl;
+                //  n->setCGFobject((*it_elems)->attr["id"]);
+                  break;
+                }
+            }
 
-			/* if ((*it)->root->attr["id"] == ID)
-				   		{
-				   			n->setId(ID);
-				   		}*/
+          i++;
+        }
+      nodes.push_back(n);
+      cout << "Node ID: " << n->getId() << endl;
 
-		}
-	}
-
+      //Create map entry for node
+      node_children[n->getId()] = new list<string>();
+      cout << "passou" << endl;
+    }
 }
+
+
 
 
 

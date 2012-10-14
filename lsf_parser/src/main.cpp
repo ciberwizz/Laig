@@ -39,11 +39,11 @@ int main(int argc, char*argv[]){
 
   //elem *sph;
   BigElemContainers* cena = a.getGraphNodes();
-  bool check = true;
+  //bool check = true;
   string ID = "table";
   Graph *g;
 
- g->getGraph(cena,check, ID);
+ g->getGraph(cena,ID);
 
 
   CGFapplication app = CGFapplication();
