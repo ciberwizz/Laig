@@ -44,8 +44,6 @@ Scene::Scene(Elems* els):lights(){
 
 void Scene::addLight(Light *light){
 	this->lights.push_back(light);
-
-	//TODO maximum of 8 lights active...
 }
 
 //includes adding cgfobgjects
@@ -106,12 +104,21 @@ void Scene::init()
 
 	// Sets up some lighting parameters
 	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);  // Define ambient light
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, CGFlight::background_ambient);  // Define ambient light
+//TODO CHANGE TO LIGHING CONFIG
+
 
 	if(polygShading == "gouraud")
 		glShadeModel(GL_SMOOTH);
 	else
 		glShadeModel(GL_FLAT);
+
+	list<Light *>::iterator light_it = lights.begin();
+	for(int i = 0; (light_it != lights.end()) && (i < 8) ; light_it++)
+		if( (*light_it)->isEnabled() ){
+			(*light_it)->init();
+			i++;
+		}
 
 
 }
@@ -140,6 +147,7 @@ void Scene::display()
 	list<Light *>::iterator light_it = lights.begin();
 	for(int i = 0; (light_it != lights.end()) && (i < 8) ; light_it++)
 		if( (*light_it)->isEnabled() ){
+			(*light_it)->init();
 			(*light_it)->draw();
 			i++;
 		}
@@ -149,8 +157,7 @@ void Scene::display()
 	axis.draw();
 
 	//TODO DRAW OBJECTS AND LIGHT AND SHIT
-
-
+//light0->draw();
 
 
 	// We have been drawing in a memory area that is not visible - the back buffer,

@@ -47,13 +47,14 @@ int main(int argc, char*argv[]){
   a.getLightingConfig(); //TODO é necessario tratar desta bosta!
   map<string, Light*> luses = map<string, Light*>();
   elcs = a.getLights();
-  int i=0;
+  int i=1;
 
   for(ElemContainers::iterator it = elcs->begin() ; it != elcs->end() ; it++ ) {
 	  //it cannot be after because (+it) will be deleted in Light constructer
 	  string id =(*it)->root->attr["id"];
 	  Light * l = new Light(i++, (*it));
 	  luses[id] = l;
+	  sc.addLight(l);
 	  cout << i << endl;
   }
 
@@ -77,7 +78,7 @@ int main(int argc, char*argv[]){
   try {
       app.init(&argc, argv);
 
-      app.setScene(new DemoScene());
+      app.setScene(&sc);
       app.setInterface(new CGFinterface());
       app.run();
   }

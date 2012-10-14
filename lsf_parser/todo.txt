@@ -7,11 +7,12 @@ scene
 		cameras x
 		graph x
 	draw:
-		lights x
+		lights x 
 		cameras- initial..
 		graph: graph.h missing getRoot...
+		TODO FALTA USAR O AMBIENT LIGHT do lightconfig do parser!!
 		
-
+TODO FIX LIGHT
 	
 from main to:
 	appearences -> tested

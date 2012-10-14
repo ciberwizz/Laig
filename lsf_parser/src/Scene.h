@@ -21,8 +21,11 @@ private:
 	bool cullEnabled;
 
 	list<Light *> lights;
+	CGFlight* light0;
 
 	Graph *graph;
+
+
 public:
 	Scene(Elems*);
 	void addLight(Light *);

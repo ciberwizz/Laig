@@ -19,6 +19,13 @@ private:
 	string name_id;
 	const float* exponent;
 	bool enabled;
+	float direct[4];
+	float ambient[4];
+	float diffuse[4];
+	float specular[4];
+	float angle;
+	float pos[4];
+	bool spot;
 public:
 	Light(unsigned int lightid, elemContainer * elc);
 	void draw();
@@ -26,6 +33,7 @@ public:
 	unsigned int getId();
 	string getName();
 	bool isEnabled();
+	void init();
 	virtual ~Light();
 };
 
