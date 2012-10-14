@@ -32,6 +32,7 @@ private:
 //	void Populate_nodRef(map1)
 	//map<id_grpah, appearence_id>
 	map< string, list<string>* > node_children;
+	map< string, string > node_appearance;
 public:
 	Graph();
   /*
@@ -50,6 +51,7 @@ public:
    *
    */
   void getGraph(BigElemContainers* bec,string ID);
+  GraphNode* getRoot();
   virtual ~Graph(){};
 };
 

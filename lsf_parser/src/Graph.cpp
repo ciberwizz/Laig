@@ -15,6 +15,7 @@ Graph::Graph(){
   appearances = list<CGFappearance*>();
   objects = list<CGFobject*>();
   node_children = map< string, list<string>* >();
+  node_appearance = map< string, string >();
 }
 
 void Graph::getGraph(BigElemContainers* bec, string ID)
@@ -30,6 +31,8 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
 
       //List that will contain the children's Ids
       list<string> * children = new list<string>();
+      //Variable where the appearance of this node will be stored
+      string appearance = "";
 
       //Node to be scanned
       string nodeName = (*it)->root->attr["id"];
@@ -166,7 +169,7 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
                 {
                   //   cout << "Atributos: " << (*it_elems)->attr["id"] << endl;
                   //  n->setCGFobject((*it_elems)->attr["id"]);
-                  break;
+                  node_appearance[n->getId()] = (*it_elems)->attr["id"];
                 }
             }
 
@@ -176,13 +179,21 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
       //Insert Graphnode into nodes list
       nodes.push_back(n);
 
+      if(n->getId() == ID)
+        {
+          root = n;
+        }
+
       //Create map entry for node
       node_children[n->getId()] = children;
     }
 
 }
 
-
+GraphNode* Graph::getRoot()
+{
+  return root;
+}
 
 
 
