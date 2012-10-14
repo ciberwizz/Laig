@@ -1,10 +1,16 @@
 (934939823) miguel rossi seabra:
 cameras
+	add option to enable witch one to CGFinterface
 scene
 	insert:
-		lights
-		cameras
-		graph
+		lights x
+		cameras x
+		graph x
+	draw:
+		lights x
+		cameras- initial..
+		graph: graph.h missing getRoot...
+		
 from main to:
 	appearences
 	lights
@@ -14,5 +20,4 @@ from main to:
 criar objecctos apartir do parser 
 
 
-normais dos objectos - done?
-demoscene com o grapho
+demoscene com o grapho ->scene.h
