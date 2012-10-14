@@ -9,11 +9,8 @@ scene
 	draw:
 		lights - XXXXX WORKING
 		cameras- initial..
-		graph: graph.h missing getRoot...
-		TODO FALTA USAR O AMBIENT LIGHT do lightconfig do parser!!
-		
-TODO FIX LIGHT
-	
+		graph: XX WORKING
+			
 from main to:
 	appearences -> tested
 	lights -> tested
@@ -22,5 +19,5 @@ from main to:
 (911134479) paulo silva:
 criar objecctos apartir do parser 
 	Cylinder falta TOPOS
-
-demoscene com o grapho ->scene.h
+	Rectangle dont work
+	triangles dont work

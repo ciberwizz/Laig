@@ -82,6 +82,7 @@ Cylinder::Cylinder(double br, double tr, double ht, int sl, int st)
 	stacks = st;
 	quadratic = gluNewQuadric();
 
+
 }
 Cylinder::Cylinder(elem* el){
 	//<cylinder base="1" top="1" height="1" slices="50" stacks="50" />
@@ -149,6 +150,8 @@ void Cylinder::draw()
 	gluQuadricTexture(quadratic, GL_TRUE);      // Create Texture Coords
 	gluQuadricNormals(quadratic, GLU_SMOOTH);   // Create Smooth Normals
 	gluCylinder(quadratic, baseRadius, topRadius, height, slices, stacks);
+
+	//gluDisk()
 }
 
 //RECTANGULO
@@ -163,12 +166,12 @@ Rectangle::Rectangle(double x_1, double y_1, double x_2, double y_2)
 
 Rectangle::Rectangle(elem* el){
 	//<rectangle x1="0" y1="0" x2="1" y2="1" />
-	stringstream ss;
+	stringstream* ss;
 
-	ss << el->attr["x1"]; ss >> this->x1;
-	ss << el->attr["y1"]; ss >> this->y1;
-	ss << el->attr["x2"]; ss >> this->x2;
-	ss << el->attr["y2"]; ss >> this->y2;
+	ss = new stringstream( el->attr["x1"] ); *ss >> this->x1; delete ss;
+	ss = new stringstream( el->attr["y1"] ); *ss >> this->y1; delete ss;
+	ss = new stringstream( el->attr["x2"] ); *ss >> this->x2; delete ss;
+	ss = new stringstream( el->attr["y2"] ); *ss >> this->y2; delete ss;
 
 	delete el;
 }
@@ -221,7 +224,7 @@ void Rectangle::draw()
 		//ac = {x2 - x1, 0, 0};
 		//normal = ab X ac
 
-	double normal[] = {0 ,0 , -(y2-y1)*(x2-x1)};
+	double normal[] = {0 ,0 , (y2-y1)*(x2-x1)};
 
 	//normalize
 	normal[2] /= sqrt(normal[2]*normal[2]);
@@ -230,11 +233,11 @@ void Rectangle::draw()
 		glNormal3d(normal[0],normal[1],normal[2]);
 		glVertex3d(x1,y1,0);
 		glNormal3d(normal[0],normal[1],normal[2]);
-		glVertex3d(x1,y2,0);
+		glVertex3d(x2,y1,0);
 		glNormal3d(normal[0],normal[1],normal[2]);
 		glVertex3d(x2,y2,0);
 		glNormal3d(normal[0],normal[1],normal[2]);
-		glVertex3d(x2,y1,0);
+		glVertex3d(x1,y2,0);
 	glEnd();
 }
 
@@ -250,28 +253,48 @@ Triangle::Triangle(double x_1, double y_1, double z_1, double x_2, double y_2, d
 
 Triangle::Triangle(elem* el) {
 	//<triangle x1="0" y1="0" z1="0" x2="1" y2="0" z2="0" x3="0.5" y3="1" z3="0" />
-	stringstream ss;
+	stringstream *ss;
 
-	ss << el->attr["x1"]; ss >> el->attr["x1"];
 
-	ss << el->attr["y1"]; ss >> el->attr["y1"];
+	ss = new stringstream( el->attr["x1"] );
+	*ss >> x1;
+	delete ss;
 
-	ss << el->attr["z1"]; ss >> el->attr["z1"];
+	ss = new stringstream( el->attr["y1"] );
+	*ss >> y1;
+	delete ss;
 
-	ss << el->attr["x2"]; ss >> el->attr["x2"];
+	ss = new stringstream( el->attr["z1"] );
+	*ss >> z1;
+	delete ss;
 
-	ss << el->attr["y2"]; ss >> el->attr["y2"];
+	ss = new stringstream( el->attr["x2"] );
+	*ss >> x2;
+	delete ss;
 
-	ss << el->attr["z2"]; ss >> el->attr["z2"];
+	ss = new stringstream( el->attr["x2"] );
+	*ss >> y2;
+	delete ss;
 
-	ss << el->attr["x3"]; ss >> el->attr["x3"];
+	ss = new stringstream( el->attr["z2"] );
+	*ss >> z2;
+	delete ss;
 
-	ss << el->attr["y3"]; ss >> el->attr["y3"];
+	ss = new stringstream( el->attr["x3"] );
+	*ss >> x3;
+	delete ss;
 
-	ss << el->attr["z3"]; ss >> el->attr["z3"];
+	ss = new stringstream( el->attr["y3"] );
+	*ss >> y3;
+	delete ss;
+
+	ss = new stringstream( el->attr["z3"] );
+	*ss >> z3;
+	delete ss;
+
+
 
 	delete el;
-
 }
 
 double Triangle::getX1() const
@@ -362,7 +385,7 @@ void Triangle::draw()
 	normal[1] /= normalize_factor;
 	normal[2] /= normalize_factor;
 
-	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLES);
 		glNormal3d(normal[0], normal[1], normal[2]);
 		glVertex3d(x1,y1,z1);
 		glNormal3d(normal[0], normal[1], normal[2]);
