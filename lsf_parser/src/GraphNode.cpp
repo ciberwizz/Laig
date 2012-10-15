@@ -1,5 +1,5 @@
 #include "GraphNode.h"
-
+#include "appearence.h"
 GraphNode::GraphNode() {
 	obj = NULL;
 	appear = NULL;
@@ -8,7 +8,7 @@ GraphNode::GraphNode() {
 
 }
 
-GraphNode::GraphNode(string i, CGFobject * o, CGFappearance *m) {
+GraphNode::GraphNode(string i, CGFobject * o, appearence *m) {
 	id = i;
 	obj = o;
 	appear = m;
@@ -40,11 +40,11 @@ list<GraphNode *>::const_iterator GraphNode::getChildIterator(){
 	return children.begin();
 }
 
-void GraphNode::setAppearance(CGFappearance* mat){
+void GraphNode::setAppearance(appearence* mat){
 	appear = mat;
 }
 
-CGFappearance* GraphNode::getAppearance() const{
+appearence* GraphNode::getAppearance() const{
 	return appear;
 }
 
@@ -73,13 +73,18 @@ void GraphNode::draw(){
 		glMultMatrixd(this->transformations);
 
 		if( this->appear != NULL)
-			this->appear->apply();
+		  {
+		   this->appear->apply();
+		  }
+		else
+		  cout << "appear is null\n";
+
 		if(obj != NULL){
-			cout << "\ndrew " << this->id;
+		//	cout << "\ndrew " << this->id;
 
 			obj->draw();
 
-		} else cout << "obj is NULL\n";
+		} //else cout << "obj is NULL\n";
 
 		list<GraphNode *>::iterator it;
 		for(it = children.begin() ; it != children.end() ; it++)

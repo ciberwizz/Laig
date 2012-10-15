@@ -23,25 +23,11 @@ int main(int argc, char*argv[]){
 	Scene sc = Scene(a.getGlobals(), a.getLightingConfig());
 	cout << "it ate all of them! RUN!!\n";
 
-	/*****************************************************************************/
-
-	/*
-	 * testing appearence class
-	 */
-	map<string, appearence*> looks = map<string, appearence*>();
-
-	cout << "going to get appear..\n";
-	ElemContainers* elcs = a.getAppearences();
-	for(ElemContainers::iterator it = elcs->begin() ; it != elcs->end() ; it++ ) {
-		looks[(*it)->root->attr["id"]] = new appearence((*it)->elems);
-	}
-	cout << "just got the freaking appear...\n";
-
-	/**************************************************************************/
-
 	/*
 	 * Testing Lights
 	 */
+	ElemContainers* elcs = new ElemContainers();
+
 	cout << "\n\n\nTime to Test Lights!\n";
 	//testing lights
 	a.getLightingConfig(); //TODO é necessario tratar desta bosta!
