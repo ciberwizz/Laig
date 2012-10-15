@@ -142,8 +142,8 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
                         }
                       if((*eit)-> name == "cylinder")
                         {cout << "entrei no cylinder\n";
-                          obj = new Cylinder((*eit));
-                          cout << "criei cylinder\n";
+                        obj = new Cylinder((*eit));
+                        cout << "criei cylinder\n";
                         }
                       if((*eit)-> name == "torus")
                         {
@@ -242,26 +242,22 @@ void Graph::setNodeAppearance()
 {
   map< string, string >::iterator it;
   map<string, appearence*>::iterator itapp;
-  list<GraphNode*>::iterator itgn;
+  list<GraphNode*>::iterator it_graphnode;
 
-
+  //node_appearance has <idNode,idAppea..
   for(it = node_appearance.begin(); it != node_appearance.end(); it++)
     {
-      for(itapp = looks.begin(); itapp != looks.end(); itapp++){
-
-          //if node appearance = appearance id
-          if((*it).second == (*itapp).first)
-            {
-              //Search for the node to set
-              for(itgn = nodes.begin(); itgn != nodes.end(); itgn++)
-                {
-                  if((*itgn)->getId() == (*it).first)
-                    {
-                      (*itgn)->setAppearance((*itapp).second);
-                    }
-                }
-            }
-
+      map<string, appearence*>::iterator look_it = looks.find(it->second);
+      if( look_it != looks.end()){
+          //found an appearence correesponding to an node
+          // lets find the node to insert
+          it_graphnode = nodes.begin();
+          for(; it_graphnode != nodes.end() ; it_graphnode++){
+              if(it->first == (*it_graphnode)->getId()){
+                  (*it_graphnode)->setAppearance(look_it->second);
+                  break;
+              }
+          }
       }
 
     }

@@ -158,8 +158,6 @@ void Cylinder::draw()
 	gluQuadricNormals(quadratic, GLU_SMOOTH);   // Create Smooth Normals
 	gluCylinder(quadratic, baseRadius, topRadius, height, slices, stacks);
 
-	gluQuadricTexture(quadratic_base, GL_TRUE);      // Create Texture Coords
-	gluQuadricNormals(quadratic_base, GLU_SMOOTH);   // Create Smooth Normals
 	//bottom
 	glPushMatrix();
 		glRotated(180,0,1,0);

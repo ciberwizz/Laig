@@ -1,5 +1,5 @@
 #include "GraphNode.h"
-
+#include "appearence.h"
 GraphNode::GraphNode() {
 	obj = NULL;
 	appear = NULL;
@@ -8,7 +8,7 @@ GraphNode::GraphNode() {
 
 }
 
-GraphNode::GraphNode(string i, CGFobject * o, CGFappearance *m) {
+GraphNode::GraphNode(string i, CGFobject * o, appearence *m) {
 	id = i;
 	obj = o;
 	appear = m;
@@ -40,11 +40,11 @@ list<GraphNode *>::const_iterator GraphNode::getChildIterator(){
 	return children.begin();
 }
 
-void GraphNode::setAppearance(CGFappearance* mat){
+void GraphNode::setAppearance(appearence* mat){
 	appear = mat;
 }
 
-CGFappearance* GraphNode::getAppearance() const{
+appearence* GraphNode::getAppearance() const{
 	return appear;
 }
 
@@ -74,6 +74,7 @@ void GraphNode::draw(){
 
 		if( this->appear != NULL)
 			this->appear->apply();
+
 
 		if(obj != NULL)
 			obj->draw();
