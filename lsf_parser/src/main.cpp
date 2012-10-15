@@ -8,6 +8,8 @@
 #include "appearence.h"
 #include "Light.h"
 #include "Scene.h"
+#include "Cameras.h"
+#include "lsfInterface.h"
 using namespace std;
 
 
@@ -72,15 +74,36 @@ int main(int argc, char*argv[]){
 	 g->getGraph(cena,ID);
 	 g->setAppID(a.getAppearences());
 
-	//TODO NOT DRAWING
+	 //import graph
 	sc.setGraph(g);
+
+	//import cameras to scene
+	bigElemContainer * b = a.getCameras();
+	Cameras *c;
+	if( b->elems != NULL)
+		for(Elems::iterator it = b->elems->begin(); it != b->elems->end() ; it++)
+		{
+			c = new Cameras(*it);
+			sc.addCGFcamera(c);
+		}
+
+	if( b->elemCs != NULL)
+		for(ElemContainers::iterator it = b->elemCs->begin(); it!=b->elemCs->end(); it++ ){
+			c = new Cameras(*it);
+			sc.addCGFcamera(c);
+		}
+	c->setInitial(b->root);
+
+	lsfInterface * cgf_interface =new lsfInterface(12);
+
+//cgf_interface->addPanel("sad",0);
 	CGFapplication app = CGFapplication();
 
 	try {
 		app.init(&argc, argv);
 
 		app.setScene(&sc);
-		app.setInterface(new CGFinterface());
+		app.setInterface(cgf_interface);
 		app.run();
 	}
 	catch(GLexception& ex) {

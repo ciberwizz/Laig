@@ -171,6 +171,10 @@ string Light::getName(){
 bool Light::isEnabled(){
 	return this->enabled;
 }
+void Light::setEnabled(bool a){
+	this->enabled = a;
+	this->init();
+}
 
 Light::~Light() {
 	delete this->light;

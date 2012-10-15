@@ -33,6 +33,7 @@ public:
 	unsigned int getId();
 	string getName();
 	bool isEnabled();
+	void setEnabled(bool);
 	void init();
 	virtual ~Light();
 };

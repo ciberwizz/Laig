@@ -28,12 +28,12 @@
    <cameras initial="init" >
        <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
 
-        <perspective id="primary" near="1" far="10" angle="45">
+        <perspective id="primary" near="2" far="20" angle="45">
            <from x="10" y="10" z="10" />
            <to x="0" y="0" z="0" />
         </perspective>
 
-        <ortho id="primary" near="1" far="10" left="10" right="10" top="10" bottom="0" />
+         <ortho id="primary" near="1" far="10" left="10" right="10" top="10" bottom="0" /> 
 
     </cameras>
  

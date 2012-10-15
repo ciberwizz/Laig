@@ -9,7 +9,7 @@
 
 #include "cgf/CGFappearance.h"
 
-Scene::Scene(Elems* globals,elemContainer* lconfig):lights(){
+Scene::Scene(Elems* globals,elemContainer* lconfig):lights(), cameras(), cam(0), light(1){
 	Elems::iterator it = globals->begin();
 	cullEnabled = false;
 	graph = NULL;
@@ -83,8 +83,8 @@ void Scene::setGraph(Graph* gr){
 	graph = gr;
 }
 
-void Scene::addCGFcamera(CGFcamera* cam){
-	this->scene_cameras.push_back(cam);
+void Scene::addCGFcamera(Cameras* cam){
+	this->cameras.push_back(cam);
 	//TODO set active camera
 }
 
@@ -186,12 +186,32 @@ void Scene::display()
 	glLoadIdentity();
 
 	// Apply transformations corresponding to the camera position relative to the origin
-	CGFscene::activeCamera->applyView();
 
+	cout << "\nlight ="<<this->cam;
+	if(this->cam > cameras.size())
+		this->cam = 0;
+	int i = this->cam;
+	list<Cameras *>::iterator it;
+	if(i != 0){
+		for( it = cameras.begin() ; it != cameras.end() ;it++)
+			if(--i == 0){
+				(*it)->updateProjectionMatrix(CGFapplication::vpw, CGFapplication::vph);
+				(*it)->applyView();
+			}
+	} else{
+		CGFscene::activeCamera->applyView();
 
+	}
+
+	if(light == 2 )
+		light =0;
 	//draw lights: only 8 at the most
 	list<Light *>::iterator light_it = lights.begin();
 	for(int i = 0; (light_it != lights.end()) && (i < 8) ; light_it++){
+		if(light == 1)
+			(*light_it)->setEnabled(true);
+		else
+			(*light_it)->setEnabled(false);
 		(*light_it)->draw();
 		i++;
 	}

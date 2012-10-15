@@ -6,6 +6,7 @@
 #include "parser.h"
 #include "Graph.h"
 #include "Light.h"
+#include "Cameras.h"
 
 class Scene : public CGFscene
 {
@@ -30,18 +31,22 @@ private:
 	CGFlight* light0;
 
 	Graph *graph;
+	list<Cameras *> cameras;
+
 public:
 	//params: globals, lightingconfig
 	Scene(Elems*,elemContainer*);
 	void addLight(Light *);
 	//includes adding cgfobgjects
 	void setGraph(Graph *);
-	void addCGFcamera(CGFcamera*);
+	void addCGFcamera(Cameras*);
 
 	void init();
 	void display();
 	void update(long t);
 	virtual ~Scene();
+	int cam;
+	int light;
 private:
 
 };

@@ -74,12 +74,10 @@ void GraphNode::draw(){
 
 		if( this->appear != NULL)
 			this->appear->apply();
-		if(obj != NULL){
-			cout << "\ndrew " << this->id;
 
+		if(obj != NULL)
 			obj->draw();
 
-		} else cout << "obj is NULL\n";
 
 		list<GraphNode *>::iterator it;
 		for(it = children.begin() ; it != children.end() ; it++)

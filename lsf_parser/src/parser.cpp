@@ -133,8 +133,15 @@ bigElemContainer* LSFParser::getCameras(){
 	bigElemContainer* bgc = new bigElemContainer;
 
 	bgc->root = getElem(this->camerasE);
-	bgc->elems = getElems(this->camerasE->FirstChildElement(),true);
-	bgc->elemCs = getElemContainers(this->camerasE->FirstChildElement(),true);
+	TiXmlElement * t =this->camerasE->FirstChildElement();
+	if(t != NULL)
+		bgc->elems = getElems(t,true);
+	else bgc->elems = NULL;
+
+	t = this->camerasE->FirstChildElement();
+	if(t != NULL)
+		bgc->elemCs = getElemContainers(t,true);
+	else bgc->elemCs = NULL;
 
 
 	return bgc;
