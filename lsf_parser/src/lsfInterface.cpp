@@ -18,10 +18,9 @@ void lsfInterface::processKeyboard(unsigned char k, int x, int y){
 		break;
 	case 'l':
 		((Scene *)this->scene)->light++;
+		break;
 	}
 }
 
-lsfInterface::~lsfInterface() {
-	// TODO Auto-generated destructor stub
-}
+lsfInterface::~lsfInterface() {}
 

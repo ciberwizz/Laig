@@ -92,13 +92,13 @@ Cylinder::Cylinder(double br, double tr, double ht, int sl, int st)
 Cylinder::Cylinder(elem* el){
 	//<cylinder base="1" top="1" height="1" slices="50" stacks="50" />
 	stringstream* ss;
-cout << "IN: to parse\n";
+
 	ss = new stringstream( el->attr["base"] ); *ss >> this->baseRadius; delete ss;
 	ss = new stringstream( el->attr["height"] ); *ss >> this->height; delete ss;
 	ss = new stringstream( el->attr["top"] ); *ss >> this->topRadius; delete ss;
 	ss = new stringstream( el->attr["slices"] ); *ss >> this->slices; delete ss;
 	ss = new stringstream( el->attr["stacks"] ); *ss >> this->stacks; delete ss;
-	cout << "IN: parsed\n";
+
 	delete el;
 	quadratic = gluNewQuadric();
 	quadratic_base = gluNewQuadric();

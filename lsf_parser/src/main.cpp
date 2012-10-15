@@ -15,24 +15,27 @@ using namespace std;
 
 int main(int argc, char*argv[]){
 
-	LSFParser a = LSFParser("ster.lsf");
+  string parser = "";
 
-	/*
-	 * Testing Scene plus globals
-	 */
+  if(argc > 1){
+      parser = argv[1];
+  }
+  else{
+      parser = "ster.lsf";
+  }
 
-	cout << "\nTesting how Scene takes globals\n";
+  cout << "********USAGE**********" << endl;
+  cout << "Use v key to browse through the available perspectives...(if you get a black screen, go full screen)\n";
+  cout << "Use l to switch off/on lights\n";
+  cout << "Enjoy :)\n" << endl;
+
+	LSFParser a = LSFParser(parser);
+
 	Scene sc = Scene(a.getGlobals(), a.getLightingConfig());
-	cout << "it ate all of them! RUN!!\n";
 
-	/*
-	 * Testing Lights
-	 */
 	ElemContainers* elcs = new ElemContainers();
 
-	cout << "\n\n\nTime to Test Lights!\n";
-	//testing lights
-	a.getLightingConfig(); //TODO é necessario tratar desta bosta!
+	a.getLightingConfig();
 	map<string, Light*> luses = map<string, Light*>();
 	elcs = a.getLights();
 	int i=1;
@@ -45,15 +48,7 @@ int main(int argc, char*argv[]){
 		sc.addLight(l);
 	}
 
-	cout << "Lights Tested!\n";
-
-	/*****************************************************************************/
-
-
-
-	//elem *sph;
 	BigElemContainers* cena = a.getGraphNodes();
-	//bool check = true;
 	string ID = a.getGraphRootId();
 
 	Graph *g = new Graph();
@@ -82,7 +77,7 @@ int main(int argc, char*argv[]){
 
 	lsfInterface * cgf_interface =new lsfInterface(12);
 
-//cgf_interface->addPanel("sad",0);
+
 	CGFapplication app = CGFapplication();
 
 	try {

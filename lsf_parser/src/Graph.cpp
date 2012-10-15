@@ -55,9 +55,6 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
                   //If we want to do a rotation
                   if((*eit)-> name == "rotate")
                     {
-                      /*       cout << (*eit)-> name << endl;
-                      cout << "Angle: " << (*eit)->attr["angle"] << endl;
-                      cout << "Axis: " << (*eit)->attr["axis"] << endl;*/
 
                       //Conversion of parameter "angle" from string to int
                       istringstream angle((*eit)->attr["angle"]);
@@ -71,10 +68,6 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
                   //If we want to do a translation
                   if((*eit)-> name == "translate")
                     {
-                      /*     cout << (*eit)-> name << endl;
-                      cout << "X: " << (*eit)->attr["x"] << endl;
-                      cout << "Y: " << (*eit)->attr["y"] << endl;
-                      cout << "z: " << (*eit)->attr["z"] << endl;*/
 
                       //Conversion of parameters
                       stringstream x1;
@@ -97,12 +90,7 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
                     }
                   //If we want to scale the object
                   if((*eit)-> name == "scale")
-                    {/*
-                      cout << (*eit)-> name << endl;
-                      cout << "X: " << (*eit)->attr["x"] << endl;
-                      cout << "Y: " << (*eit)->attr["y"] << endl;
-                      cout << "z: " << (*eit)->attr["z"] << endl;*/
-
+                    {
                       //Conversion of parameters
                       stringstream x1;
                       double X;
@@ -141,9 +129,9 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
                           obj = new Sphere((*eit));
                         }
                       if((*eit)-> name == "cylinder")
-                        {cout << "entrei no cylinder\n";
+                        {
                         obj = new Cylinder((*eit));
-                        cout << "criei cylinder\n";
+
                         }
                       if((*eit)-> name == "torus")
                         {

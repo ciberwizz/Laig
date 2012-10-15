@@ -181,22 +181,7 @@ double* createMatrixRotate(string eixo,double rot){
 		/*
 		 * 1 0 0 0
 		 * 0 cos(rad) -sin(rad) 0
-		 * 0 sin(rad) cos(rad) 0//transdormation functions
-void Sphere::translate(double x, double y, double z){
-	double *mat = createMatrixTranslate(x,y,z);
-	multMatrix( this->transformation, mat);
-	delete mat;
-}
-void Sphere::scale(double x, double y, double z){
-	double *mat = createMatrixScale(x,y,z);
-	multMatrix( this->transformation, mat);
-	delete mat;
-}
-void Sphere::rotate(string eixo, double ang){
- 	double *mat = createMatrixRotate(eixo,ang);
-	multMatrix( this->transformation, mat);
-	delete mat;
-}
+		 * 0 sin(rad) cos(rad) 0
 		 * 0 0 0 1
 		 */
 

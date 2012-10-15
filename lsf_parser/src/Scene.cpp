@@ -161,12 +161,6 @@ void Scene::init()
 			i++;
 		}
 
-
-	/*
-	 * TESTING AREA
-	 */
-
-
 }
 
 void Scene::update(long t)
