@@ -187,7 +187,6 @@ void Scene::display()
 
 	// Apply transformations corresponding to the camera position relative to the origin
 
-	cout << "\nlight ="<<this->cam;
 	if(this->cam > cameras.size())
 		this->cam = 0;
 	int i = this->cam;
@@ -203,7 +202,7 @@ void Scene::display()
 
 	}
 
-	if(light == 2 )
+	if(light == lights.size() )
 		light =0;
 	//draw lights: only 8 at the most
 	list<Light *>::iterator light_it = lights.begin();
