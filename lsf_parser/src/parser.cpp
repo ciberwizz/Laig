@@ -78,7 +78,7 @@ ElemContainers* LSFParser::getElemContainers(TiXmlElement* te, bool filter=false
 		elemContainer * elc = new elemContainer;
 
 		elc->root = getElem(te);
-		elc->elems = getElems(te->FirstChildElement());
+		elc->elems = getElems(te->FirstChildElement(),false);
 
 		elcs->push_back(elc);
 	}
@@ -118,7 +118,7 @@ BigElemContainers* LSFParser::getBigElemContainers(TiXmlElement* te){
 //returns an array of globals and their attributes
 Elems* LSFParser::getGlobals(){
 
-	Elems* els= getElems( this->globalsE->FirstChildElement());
+	Elems* els= getElems( this->globalsE->FirstChildElement(),false);
 
 
 	return els;
@@ -154,13 +154,13 @@ elemContainer* LSFParser::getLightingConfig(){
 
 //returns an array of array elemcontainers identified by an id
 ElemContainers* LSFParser::getLights(){
-	ElemContainers* elcs = getElemContainers(this->lightingE->FirstChildElement("lights")->FirstChildElement());
+	ElemContainers* elcs = getElemContainers(this->lightingE->FirstChildElement("lights")->FirstChildElement(),false);
 	return elcs;
 }
 
 //returns an array of appearances each with their own elems
 ElemContainers* LSFParser::getAppearences(){
-	ElemContainers *elcs = getElemContainers(this->appearancesE->FirstChildElement());
+	ElemContainers *elcs = getElemContainers(this->appearancesE->FirstChildElement(),false);
 
 	return elcs;
 }

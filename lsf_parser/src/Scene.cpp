@@ -166,12 +166,6 @@ void Scene::init()
 	 * TESTING AREA
 	 */
 
-	this->test = new GraphNode();
-
-	//TODO NOT WORKING
-	this->test->setCGFobject(new Cylinder(5,2,5,50,50));
-
-	//this->test->setCGFobject(new Torus(2,5,10,10));
 
 }
 
@@ -208,13 +202,10 @@ void Scene::display()
 
 
 	//TODO DRAW OBJECTS AND SHIT
-//	if(graph != NULL)
-//	{
-//		graph->getRoot()->draw();
-//	}
-
-	this->test->draw();
-
+	if(graph != NULL)
+	{
+		graph->getRoot()->draw();
+	}
 
 	// We have been drawing in a memory area that is not visible - the back buffer,
 	// while the graphics card is showing the contents of another buffer - the front buffer

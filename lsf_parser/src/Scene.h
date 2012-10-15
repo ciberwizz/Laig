@@ -30,8 +30,6 @@ private:
 	CGFlight* light0;
 
 	Graph *graph;
-
-	GraphNode * test;
 public:
 	//params: globals, lightingconfig
 	Scene(Elems*,elemContainer*);

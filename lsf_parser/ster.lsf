@@ -56,7 +56,7 @@
 	
 			<light id="secondary" enabled="true">
 			        <location x="2" y="5" z="1" />
-			        <ambient r="0.8" g="0.7" b="0.7" a="0" />
+			        <ambient r="1" g="1" b="1" a="0" />
 			        <diffuse r="0.5" g="0.5" b="0.5" a="0.2" />	
 					<specular r="1" g="1" b="1" a="0" />	
 			        <!-- No caso de uma ser uma spotlight, incluir os dados abaixo; se for uma omnilight, omitir -->
@@ -70,7 +70,7 @@
     <!-- informacao de materiais; -->
    <appearances>
        <!-- deve existir um ou mais blocos "appearance" -->
-       <appearance id="default" >
+       <appearance id="materialXPTO" >
            	<emissive r="0.2" g="0.9" b="0.9" a="1" />
            	<ambient r="0.5" g="0.5" b="0.5" a="0.7" />
            	<diffuse r="0.7" g="0.7" b="0.3" a="0.8" />
@@ -81,7 +81,7 @@
          <!--  <texture file="tex.jpg" length_s="1" length_t="1" /> -->
         </appearance>
 
-	<appearance id="materialXPTO" >
+	<appearance id="default" >
            	<emissive r="0" g="0.2" b="0.5" a="1" />
            	<ambient r="0" g="0.2" b="0.5" a="1" />
            	<diffuse r="0" g="0.2" b="0.5" a="1" />

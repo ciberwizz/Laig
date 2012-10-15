@@ -141,24 +141,27 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
                           obj = new Sphere((*eit));
                         }
                       if((*eit)-> name == "cylinder")
-                        {
-                          obj = new Sphere((*eit));
+                        {cout << "entrei no cylinder\n";
+                          obj = new Cylinder((*eit));
+                          cout << "criei cylinder\n";
                         }
                       if((*eit)-> name == "torus")
                         {
-                          obj = new Sphere((*eit));
+                          obj = new Torus((*eit));
                         }
                       if((*eit)-> name == "triangle")
                         {
-                          obj = new Sphere((*eit));
+                          obj = new Triangle((*eit));
                         }
                       if((*eit)-> name == "rectangle")
                         {
-                          obj = new Sphere((*eit));
+                          obj = new Rectangle((*eit));
                         }
+                      n->setCGFobject(obj);
+                      obj = NULL;
                     }
                   //Set the GraphNode object
-                  n->setCGFobject(obj);
+
                 }
             }
 
@@ -255,7 +258,6 @@ void Graph::setNodeAppearance()
                   if((*itgn)->getId() == (*it).first)
                     {
                       (*itgn)->setAppearance((*itapp).second);
-                      cout << "Appearance: " << (*itgn)->getAppearance() << endl;
                     }
                 }
             }
@@ -274,7 +276,7 @@ void Graph::setAppID(ElemContainers* elcs)
     {
       looks[(*it)->root->attr["id"]] = new appearence((*it)->elems);
     }
-  cout << "Looks size: " << looks.size() << endl;
+  this->setNodeAppearance();
 }
 
 

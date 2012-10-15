@@ -17,17 +17,21 @@ Sphere::Sphere(double r, int sl, int st){
 }
 
 Sphere::Sphere(elem* el){
-	stringstream ss;
+	stringstream* ss;
 
-	ss << el->attr["radius"];
 
-	ss >> this->radius;
+	ss = new stringstream( el->attr["radius"]);
+	*ss >> this->radius;
+	delete ss;
 
-	ss << el->attr["slices"];
-	ss >> this->slices;
+	ss = new stringstream( el->attr["slices"]);
+	*ss >> this->slices;
+	delete ss;
 
-	ss << el->attr["stacks"];
-	ss >> this->stacks;
+	ss = new stringstream( el->attr["stacks"]);
+	*ss >> this->stacks;
+	delete ss;
+
 	quadratic = gluNewQuadric();
 
 	delete el;
@@ -87,15 +91,17 @@ Cylinder::Cylinder(double br, double tr, double ht, int sl, int st)
 }
 Cylinder::Cylinder(elem* el){
 	//<cylinder base="1" top="1" height="1" slices="50" stacks="50" />
-	stringstream ss;
-
-	ss << el->attr["base"]; ss >> this->baseRadius;
-	ss << el->attr["height"]; ss >> this->height;
-	ss << el->attr["top"]; ss >> this->topRadius;
-	ss << el->attr["slices"]; ss >> this->slices;
-	ss << el->attr["stacks"]; ss >> this->stacks;
-
+	stringstream* ss;
+cout << "IN: to parse\n";
+	ss = new stringstream( el->attr["base"] ); *ss >> this->baseRadius; delete ss;
+	ss = new stringstream( el->attr["height"] ); *ss >> this->height; delete ss;
+	ss = new stringstream( el->attr["top"] ); *ss >> this->topRadius; delete ss;
+	ss = new stringstream( el->attr["slices"] ); *ss >> this->slices; delete ss;
+	ss = new stringstream( el->attr["stacks"] ); *ss >> this->stacks; delete ss;
+	cout << "IN: parsed\n";
 	delete el;
+	quadratic = gluNewQuadric();
+	quadratic_base = gluNewQuadric();
 }
 
 double Cylinder::getBaseradius() const
@@ -420,12 +426,12 @@ Torus::Torus(double inR, double outR, int sl, int lp)
 
 Torus::Torus(elem* el){
     //<torus inner="0.5" outer="1" slices="80" loops="10" />
-	stringstream ss;
+	stringstream* ss;
 
-	ss << el->attr["inner"]; ss >> this->innerRadius;
-	ss << el->attr["outer"]; ss >> this->outerRadius;
-	ss << el->attr["slices"]; ss >> this->slices;
-	ss << el->attr["loops"]; ss >> this->loops;
+	ss = new stringstream(  el->attr["inner"] ); *ss >> this->innerRadius; delete ss;
+	ss = new stringstream(  el->attr["outer"] ); *ss >> this->outerRadius; delete ss;
+	ss = new stringstream(  el->attr["slices"] ); *ss >> this->slices; delete ss;
+	ss = new stringstream(  el->attr["loops"] ); *ss >> this->loops; delete ss;
 
 	delete el;
 }

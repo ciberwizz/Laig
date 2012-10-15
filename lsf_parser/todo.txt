@@ -18,6 +18,4 @@ from main to:
 
 (911134479) paulo silva:
 criar objecctos apartir do parser 
-	Cylinder falta TOPOS
-	Rectangle dont work
-	triangles dont work
+

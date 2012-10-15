@@ -71,7 +71,6 @@ int main(int argc, char*argv[]){
 	Graph *g = new Graph();
 	 g->getGraph(cena,ID);
 	 g->setAppID(a.getAppearences());
-	 g->setNodeAppearance();
 
 	//TODO NOT DRAWING
 	sc.setGraph(g);
