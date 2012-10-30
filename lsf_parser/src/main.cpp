@@ -4,7 +4,7 @@
 #include "Graph.h"
 #include <exception>
 #include "cgf/CGFapplication.h"
-#include "DemoScene.h"
+#include "Scene.h"
 #include "appearence.h"
 #include "Light.h"
 #include "Scene.h"
