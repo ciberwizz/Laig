@@ -39,6 +39,14 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
       string nodeName = (*it)->root->attr["id"];
       n->setId(nodeName);
 
+      //check if it's a displaylist node.
+      if( (*it)->root->attr.find("displaylist") != (*it)->root->attr.end() )
+    	  if( (*it)->root->attr["displaylist"] == "true" )
+    		  n->setDisplayList(true);
+    	  else
+    		  cout << "its false\n";
+      else cout << "it doesn't have!\n";
+
 
       //Parse ElemContainers
       for (ElemContainers::iterator ecit = (*it)->elemCs->begin();

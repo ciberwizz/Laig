@@ -161,6 +161,13 @@ void Scene::init()
 			i++;
 		}
 
+
+	//compiles the display list!
+	this->display_list = glGenLists(1);
+	glNewList(this->display_list,GL_COMPILE);
+		this->graph->getRoot()->displayListDraw();
+	glEndList();
+
 }
 
 void Scene::update(long t)
@@ -212,6 +219,10 @@ void Scene::display()
 
 	// Draw axis
 	axis.draw();
+
+
+	//draw Display list!
+	glCallList(this->display_list);
 
 
 	//TODO DRAW OBJECTS AND SHIT

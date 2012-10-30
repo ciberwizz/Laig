@@ -104,7 +104,7 @@
 <graph rootid="raiz">
 
 
-	<node id="raiz">
+	<node id="raiz" displaylist="true">
 		<transforms>
 		</transforms>
 			<appearanceref id="default" />
@@ -113,7 +113,7 @@
 		</children>		
 	</node>
 
-	<node id="sphere">
+	<node id="sphere" displaylist="true">
 		<transforms>
 		   </transforms>
 		   	<appearanceref id="default" />
@@ -122,7 +122,7 @@
 		   </children>
 	</node>
 
-	<node id="cylinder">
+	<node id="cylinder" displaylist="true">
 		<transforms>
 		   </transforms>
 		   	<appearanceref id="materialXPTO" />
@@ -131,7 +131,7 @@
 		   </children>
 	</node>
 
-	<node id="torus">
+	<node id="torus" displaylist="false">
 		<transforms>	      
 		</transforms>
 		   <appearanceref id="materialXPTO" />
@@ -140,7 +140,7 @@
 		</children>
 	</node>
 
-	<node id="triangle">
+	<node id="triangle" displaylist="true">
 		<transforms>
 		</transforms>
 			<appearanceref id="material2" />
@@ -149,7 +149,7 @@
 		</children>
 	</node>
 
-	<node id="rectangle">
+	<node id="rectangle" displaylist="true">
 		<transforms>
 		       <translate x="0" y="0" z="1" />
 		       <rotate axis="x" angle="0" />
@@ -163,7 +163,7 @@
 	
 
 		
-	<node id="table">
+	<node id="table" displaylist="true">
 		<transforms>
 		</transforms>   
 		  	 <appearanceref id="default" />
@@ -180,7 +180,7 @@
 	 </node>
 
 
-	 <node id="leg1">
+	 <node id="leg1" displaylist="true">
 		<transforms>
 		       <translate x="1.5" y="0" z="-2.5" />
 		       <scale x="1" y="3" z="1" />
@@ -191,7 +191,7 @@
 		</children>
 	 </node>
 
-	<node id="leg2">
+	<node id="leg2" displaylist="true">
 		<transforms>
 		      <translate x="-1.5" y="0" z="-2.5" />
 		       <scale x="1" y="3" z="1" />
@@ -202,7 +202,7 @@
 		</children>
 	 </node>
 
- 	<node id="leg3">
+ 	<node id="leg3" displaylist="true">
 		<transforms>
 		       <translate x="1.5" y="0" z="2.5" />
 		       <scale x="1" y="3" z="1" />
@@ -213,7 +213,7 @@
 		</children>
 	 </node>
 
-	<node id="leg4">
+	<node id="leg4" displaylist="true">
 		<transforms>
 		       <translate x="-1.5" y="0" z="2.5" />
 		       <scale x="1" y="3" z="1" />
@@ -224,7 +224,7 @@
 		</children>
 	 </node>
 
-	<node id="table_top">
+	<node id="table_top" displaylist="true">
 		<transforms>
 		       <translate x="0" y="2" z="0" />
 		       <scale x="6" y="1" z="6" />
@@ -235,7 +235,7 @@
 		</children>
 	 </node>
 
-	<node id="donut">
+	<node id="donut" displaylist="false">
 		<transforms>
 			<translate x="-1" y="3" z="0.5" />
 			<rotate axis="x" angle="90" />
@@ -246,7 +246,7 @@
 		</children>
 	</node>
 
-	<node id="cylinder_table">
+	<node id="cylinder_table" displaylist="true">
 		<transforms>
 			<translate x="1.7" y="3.4" z="0.2" />
 			<rotate axis="x" angle="90" />
@@ -257,7 +257,7 @@
 		</children>
 	</node>
 
-	<node id="cube_table">
+	<node id="cube_table" displaylist="true">
 		<transforms>
 			<translate x="1" y="3" z="2" />
 		</transforms>   
@@ -267,7 +267,7 @@
 		</children>
 	 </node>
 
-	 <node id="cubo_face">
+	 <node id="cubo_face" displaylist="true">
          <!-- bloco "transforms" obrigatorio -->
          <transforms>
          </transforms>
@@ -278,7 +278,8 @@
             <rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
          </children>
       </node>
-      <node id="cubo_face1">
+      
+      <node id="cubo_face1" displaylist="true">
          <!-- Face virada para +z -->
          <transforms>
             <translate x="0" y="0" z="0.5" />
@@ -290,7 +291,8 @@
             <noderef id="cubo_face" />
          </children>
       </node>
-      <node id="cubo_face2">
+      
+      <node id="cubo_face2" displaylist="true">
       	<!-- Face virada para -z -->
          <transforms>
             <translate x="0" y="0" z="-0.5" />
@@ -303,7 +305,8 @@
             <noderef id="cubo_face" />
          </children>
       </node>
-      <node id="cubo_face3">
+      
+      <node id="cubo_face3" displaylist="true">
          <transforms>
             <!-- Face virada para +y-->
             <translate x="0" y="0.5" z="0" />
@@ -316,7 +319,8 @@
             <noderef id="cubo_face" />
          </children>
       </node>
-      <node id="cubo_face4">
+      
+      <node id="cubo_face4" displaylist="true">
          <!-- Face virada para -y -->
          <transforms>       
             <translate x="0" y="-0.5" z="0" />
@@ -329,7 +333,8 @@
             <noderef id="cubo_face" />
          </children>
       </node>
-      <node id="cubo_face5">
+      
+      <node id="cubo_face5" displaylist="true">
          <!-- Face virada para +x -->
          <transforms>       
             <translate x="0.5" y="0" z="0" />
@@ -342,7 +347,8 @@
             <noderef id="cubo_face" />
          </children>
       </node>
-      <node id="cubo_face6">
+      
+      <node id="cubo_face6" displaylist="true">
          <!-- Face virada para -x -->
          <transforms>       
             <translate x="-0.5" y="0" z="0" />
@@ -355,7 +361,8 @@
             <noderef id="cubo_face" />
          </children>
       </node>
-       <node id="cubo">
+      
+       <node id="cubo" displaylist="true">
          <transforms />
          <appearanceref id="default" />
          <children>

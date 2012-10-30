@@ -15,6 +15,7 @@ private:
 	CGFobject * obj;
 	appearence * appear;
 	list<GraphNode *> children;
+	bool display_list;
 public:
 	GraphNode();
 	GraphNode(string, CGFobject * o, appearence * m);
@@ -29,8 +30,10 @@ public:
 	list<GraphNode *>::const_iterator getChildIterator();
 
 	void setAppearance(appearence*);
-
 	appearence* getAppearance() const;
+
+	bool getDisplayList();
+	void setDisplayList(bool);
 
 	//transformation functions
 	void translate(double, double, double);
@@ -38,6 +41,8 @@ public:
 	void rotate(string,double);
 
 	void draw();
+
+	void displayListDraw();
 
 	virtual ~GraphNode();
 };

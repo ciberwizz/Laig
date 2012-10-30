@@ -33,6 +33,9 @@ private:
 	Graph *graph;
 	list<Cameras *> cameras;
 
+	//display list in use
+	GLuint display_list;
+
 public:
 	//params: globals, lightingconfig
 	Scene(Elems*,elemContainer*);

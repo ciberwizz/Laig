@@ -5,6 +5,7 @@ GraphNode::GraphNode() {
 	appear = NULL;
 	this->children = list<GraphNode *>();
 	createIdentityMatrix(transformations);
+	display_list =  false;
 
 }
 
@@ -14,6 +15,8 @@ GraphNode::GraphNode(string i, CGFobject * o, appearence *m) {
 	appear = m;
 	this->children = list<GraphNode *>();
 	createIdentityMatrix(transformations);
+	display_list =  false;
+
 }
 
 void GraphNode::setId(string _id){
@@ -48,6 +51,13 @@ appearence* GraphNode::getAppearance() const{
 	return appear;
 }
 
+bool GraphNode::getDisplayList(){
+	return this->display_list;
+}
+
+void GraphNode::setDisplayList(bool displ){
+	this->display_list = displ;
+}
 
 //transformation functions
 void GraphNode::translate(double x, double y, double z){
@@ -70,6 +80,30 @@ void GraphNode::draw(){
 
 	glPushMatrix();
 
+	if(!this->display_list) {
+		glMultMatrixd(this->transformations);
+
+		if( this->appear != NULL)
+			this->appear->apply();
+
+
+		if( obj != NULL)
+			obj->draw();
+
+	}
+
+		list<GraphNode *>::iterator it;
+		for(it = children.begin() ; it != children.end() ; it++)
+			(*it)->draw();
+
+	glPopMatrix();
+
+}
+
+void GraphNode::displayListDraw(){
+	glPushMatrix();
+
+	if(this->display_list) {
 		glMultMatrixd(this->transformations);
 
 		if( this->appear != NULL)
@@ -78,14 +112,13 @@ void GraphNode::draw(){
 
 		if(obj != NULL)
 			obj->draw();
-
+	}
 
 		list<GraphNode *>::iterator it;
 		for(it = children.begin() ; it != children.end() ; it++)
-			(*it)->draw();
+			(*it)->displayListDraw();
 
 	glPopMatrix();
-
 }
 
 GraphNode::~GraphNode() {
