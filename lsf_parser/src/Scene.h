@@ -4,6 +4,9 @@
 #include "cgf/CGFscene.h"
 #include "cgf/CGFshader.h"
 #include "parser.h"
+#include "Plane.h"
+#include "Patch.h"
+
 #include "Graph.h"
 #include "Light.h"
 #include "Cameras.h"
@@ -35,6 +38,9 @@ private:
 
 	//display list in use
 	GLuint display_list;
+
+	Plane* plane;
+	Patch* patch;
 
 public:
 	//params: globals, lightingconfig

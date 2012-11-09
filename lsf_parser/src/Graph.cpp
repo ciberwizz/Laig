@@ -135,24 +135,33 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
                       if((*eit)-> name == "sphere")
                         {
                           obj = new Sphere((*eit));
-                        }
+                        } else
                       if((*eit)-> name == "cylinder")
                         {
                         obj = new Cylinder((*eit));
 
-                        }
+                        }else
                       if((*eit)-> name == "torus")
                         {
                           obj = new Torus((*eit));
-                        }
+                        }else
                       if((*eit)-> name == "triangle")
                         {
                           obj = new Triangle((*eit));
-                        }
+                        }else
                       if((*eit)-> name == "rectangle")
                         {
                           obj = new Rectangle((*eit));
-                        }
+                        } else
+                      if((*eit)-> name == "patch")
+						{cout << "PATCH\n\n\n";
+						  obj = new Patch((*eit));
+						} else
+					  if((*eit)-> name == "plane")
+						{
+						  obj = new Plane((*eit));
+						}
+
                       n->setCGFobject(obj);
                       obj = NULL;
                     }
@@ -161,17 +170,15 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
                 }
             }
 
-          //Run through Childless elements
-          for (Elems::iterator it_elems = (*it)->elems->begin(); it_elems != (*it)->elems->end(); it_elems++)
-            {
-              //  cout << "da fuq: " << (*it_elems)-> name << endl;
-              if((*it_elems)-> name == "appearanceref")
-                {
-                  //   cout << "Atributos: " << (*it_elems)->attr["id"] << endl;
-                  //  n->setCGFobject((*it_elems)->attr["id"]);
-                  node_appearance[n->getId()] = (*it_elems)->attr["id"];
-                }
-            }
+          if((*it)->elems != NULL)
+			  //Run through Childless elements
+			  for (Elems::iterator it_elems = (*it)->elems->begin(); it_elems != (*it)->elems->end(); it_elems++)
+				{
+				  if((*it_elems)-> name == "appearanceref")
+					{
+					  node_appearance[n->getId()] = (*it_elems)->attr["id"];
+					}
+				}
 
           i++;
         }

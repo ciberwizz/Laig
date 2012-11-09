@@ -2,12 +2,17 @@
 #include "cgf/CGFaxis.h"
 #include "cgf/CGFapplication.h"
 #include "primitives.h"
+#include "Plane.h"
+#include "Patch.h"
 #include "parser.h"
 #include <sstream>
 #include <list>
 #include <math.h>
 
 #include "cgf/CGFappearance.h"
+
+
+
 
 Scene::Scene(Elems* globals,elemContainer* lconfig):lights(), cameras(), cam(0), light(1){
 	Elems::iterator it = globals->begin();
@@ -70,6 +75,12 @@ Scene::Scene(Elems* globals,elemContainer* lconfig):lights(), cameras(), cam(0),
 			ss << (*it)->attr["a"]; ss >> this->ambient[3];
 			break;
 		}
+
+//
+//
+	int step[2] = {10,10};
+//	this->plane = new Plane(20);
+	this->patch = new Patch( &(step[0]),"wire");
 
 }
 
@@ -172,6 +183,7 @@ void Scene::init()
 
 void Scene::update(long t)
 {
+	cout << t << "\n";
 
 }
 
@@ -219,6 +231,8 @@ void Scene::display()
 
 	// Draw axis
 	axis.draw();
+//	this->plane->draw();
+//	this->patch->draw();//cout << "drawing\n";
 
 
 	//draw Display list!

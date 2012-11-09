@@ -14,6 +14,8 @@
 #include "cgf/CGFappearance.h"
 #include "cgf/CGFobject.h"
 #include "primitives.h"
+#include "Patch.h"
+#include "Plane.h"
 #include <string>
 #include <map>
 #include "appearence.h"
