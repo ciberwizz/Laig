@@ -84,6 +84,11 @@ private:
 public:
   /*!
    * Construtor Cylinder
+   * br = base radius
+   * tr = top radius
+   * ht = height
+   * sl = slices
+   * st = stacks
    */
   Cylinder();
   Cylinder(double br, double tr, double ht, int sl, int st);

@@ -100,6 +100,8 @@ Cylinder::Cylinder(elem* el){
 	ss = new stringstream( el->attr["stacks"] ); *ss >> this->stacks; delete ss;
 
 	delete el;
+
+
 	quadratic = gluNewQuadric();
 	quadratic_base = gluNewQuadric();
 }
@@ -154,10 +156,13 @@ void Cylinder::setStacks(int st)
 
 void Cylinder::draw()
 {
+
 	gluQuadricTexture(quadratic, GL_TRUE);      // Create Texture Coords
 	gluQuadricNormals(quadratic, GLU_SMOOTH);   // Create Smooth Normals
 	gluCylinder(quadratic, baseRadius, topRadius, height, slices, stacks);
 
+
+;
 	//bottom
 	glPushMatrix();
 		glRotated(180,0,1,0);

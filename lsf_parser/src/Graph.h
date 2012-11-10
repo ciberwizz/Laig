@@ -16,6 +16,7 @@
 #include "primitives.h"
 #include "Patch.h"
 #include "Plane.h"
+#include "Vehicle.h"
 #include <string>
 #include <map>
 #include "appearence.h"

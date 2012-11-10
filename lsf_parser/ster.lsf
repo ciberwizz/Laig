@@ -113,7 +113,18 @@
 				<noderef id="table"/>
 				<noderef id="tenda"/>
 				<noderef id="chao"/>
+				<noderef id="shuttle"/>
 		</children>		
+	</node>
+	<node id="shuttle" displaylist="false">
+		<transforms>
+		       <translate x="6" y="6" z="4" />
+		       <scale x="0.5" y="0.5" z="0.5" />		
+		</transforms>
+			<appearanceref id="materialXPTO" />
+		<children>
+			<vehicle />
+		</children>	
 	</node>
 	
 	<node id="tenda" displaylist="false">

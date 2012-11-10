@@ -76,12 +76,6 @@ Scene::Scene(Elems* globals,elemContainer* lconfig):lights(), cameras(), cam(0),
 			break;
 		}
 
-//
-//
-	int step[2] = {10,10};
-//	this->plane = new Plane(20);
-	this->patch = new Patch( &(step[0]),"wire");
-
 }
 
 
@@ -179,6 +173,7 @@ void Scene::init()
 		this->graph->getRoot()->displayListDraw();
 	glEndList();
 
+
 }
 
 void Scene::update(long t)
@@ -231,11 +226,9 @@ void Scene::display()
 
 	// Draw axis
 	axis.draw();
-//	this->plane->draw();
-//	this->patch->draw();//cout << "drawing\n";
 
 
-	//draw Display list!
+	//draw Display list!0
 	glCallList(this->display_list);
 
 

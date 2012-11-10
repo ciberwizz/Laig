@@ -160,6 +160,10 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
 					  if((*eit)-> name == "plane")
 						{
 						  obj = new Plane((*eit));
+						} else
+					  if((*eit)-> name == "vehicle")
+						{
+						  obj = new Vehicle();
 						}
 
                       n->setCGFobject(obj);
