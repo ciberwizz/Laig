@@ -79,9 +79,9 @@ void GraphNode::rotate(string eixo, double ang){
 void GraphNode::draw(){
 
 	glPushMatrix();
-
-	if(!this->display_list) {
 		glMultMatrixd(this->transformations);
+	if(!this->display_list) {
+
 
 		if( this->appear != NULL)
 			this->appear->apply();

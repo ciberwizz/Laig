@@ -1,13 +1,13 @@
 #include <iostream>
+#include "Scene.h"
 #include "parser.h"
 #include "primitives.h"
 #include "Graph.h"
 #include <exception>
 #include "cgf/CGFapplication.h"
-#include "Scene.h"
 #include "appearence.h"
 #include "Light.h"
-#include "Scene.h"
+
 #include "Cameras.h"
 #include "lsfInterface.h"
 

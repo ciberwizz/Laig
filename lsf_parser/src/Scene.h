@@ -1,6 +1,6 @@
 #ifndef SCENE_H
 #define SCENE_H
-
+#include "Shader.h"
 #include "cgf/CGFscene.h"
 #include "cgf/CGFshader.h"
 #include "parser.h"
@@ -10,6 +10,7 @@
 #include "Graph.h"
 #include "Light.h"
 #include "Cameras.h"
+
 
 class Scene : public CGFscene
 {
@@ -39,7 +40,7 @@ private:
 	//display list in use
 	GLuint display_list;
 
-
+	Terrain * terr;
 
 public:
 	//params: globals, lightingconfig

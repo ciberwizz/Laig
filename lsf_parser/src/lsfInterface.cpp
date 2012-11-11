@@ -1,8 +1,7 @@
 
-
+#include "Scene.h"
 #include "lsfInterface.h"
 #include <iostream>
-#include "Scene.h"
 
 using namespace std;
 void lsfInterface::iniGUI(){

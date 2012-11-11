@@ -112,10 +112,18 @@
 		<children>
 				<noderef id="table"/>
 				<noderef id="tenda"/>
-				<noderef id="chao"/>
 				<noderef id="shuttle"/>
 		</children>		
+	</node>	
+		<node id="patch" displaylist="false">
+		<transforms>
+		</transforms>
+			<appearanceref id="materialXPTO" />
+		<children>
+			<patch partsU="10" partsV="10" compute="fill" />
+		</children>	
 	</node>
+
 	<node id="shuttle" displaylist="false">
 		<transforms>
 		       <translate x="6" y="6" z="4" />
@@ -126,6 +134,7 @@
 			<vehicle />
 		</children>	
 	</node>
+
 	
 	<node id="tenda" displaylist="false">
 		<transforms>
@@ -142,8 +151,15 @@
 		</children>	
 	
 	</node>
-	
-	<node id="lado1" displaylist="false">
+	<!--		<node id="terr" displaylist="false">
+		<transforms>		
+		</transforms>
+			<appearanceref id="materialXPTO" />
+		<children>
+			<terrain heightmap="textures/HuntersTown.png" texturemap="textures/HuntersTown_tex.jpg" fragmentshader="shaders/terrain.frag" vertexshader="shaders/terrain.vert" />
+		</children>	
+	</node> -->
+ 	<node id="lado1" displaylist="false">
 		<transforms>
 		       <!-- <translate x="0" y="0" z="1" /> -->
 		       <rotate axis="y" angle="180" />
@@ -198,25 +214,6 @@
 		</children>	
 	</node>	
 	
-	<node id="patch" displaylist="false">
-		<transforms>
-		</transforms>
-			<appearanceref id="materialXPTO" />
-		<children>
-			<patch partsU="10" partsV="10" compute="fill" />
-		</children>	
-	</node>
-	
-	<node id="chao" displaylist="false">
-		<transforms>
-			<scale x="10" y="1" z="10" />		
-		</transforms>
-			<appearanceref id="materialXPTO" />
-		<children>
-			<plane step="10" />
-		</children>	
-	
-	</node>
 
 	<node id="sphere" displaylist="true">
 		<transforms>

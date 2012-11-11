@@ -7,7 +7,7 @@
 
 #ifndef GRAPH_H_
 #define GRAPH_H_
-
+#include "Terrain.h"
 #include "GraphNode.h"
 #include "parser.h"
 #include <list>

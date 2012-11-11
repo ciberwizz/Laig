@@ -5,9 +5,9 @@ Plane::Plane(){
 	step = 10;
 	init_points();
 }
-//Plane::Plane(int i):step(i){
-//	init_points();
-//}
+Plane::Plane(int i):step(i){
+	init_points();
+}
 
 Plane::Plane(elem* e){
 

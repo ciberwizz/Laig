@@ -20,7 +20,7 @@ private:
 	void init_points();
 public:
 	Plane();
-//	Plane(int);
+	Plane(int);
 	Plane(elem*);
 
 	void init();

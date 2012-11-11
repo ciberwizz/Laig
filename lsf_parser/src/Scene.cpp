@@ -9,6 +9,7 @@
 #include <list>
 #include <math.h>
 
+
 #include "cgf/CGFappearance.h"
 
 
@@ -174,6 +175,17 @@ void Scene::init()
 	glEndList();
 
 
+	elem * e = new elem;
+	e->name = "terrain";
+//	<terrain heightmap="textures/HuntersTown.png" texturemap="textures/HuntersTown_tex.jpg" fragmentshader="shaders/terrain.frag" vertexshader="shaders/terrain.vert" />
+	e->attr["heightmap"] = "textures/HuntersTown.png";
+	e->attr["texturemap"] = "textures/HuntersTown_tex.jpg";
+	e->attr["fragmentshader"] = "shaders/terrain.frag";
+	e->attr["vertexshader"] = "shaders/terrain.vert";
+
+
+
+	terr = new Terrain(e);
 }
 
 void Scene::update(long t)
@@ -226,6 +238,12 @@ void Scene::display()
 
 	// Draw axis
 	axis.draw();
+
+
+	//shader testing and stuff
+
+	terr->draw();
+
 
 
 	//draw Display list!0
