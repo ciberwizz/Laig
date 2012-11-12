@@ -5,6 +5,7 @@
 #include "Plane.h"
 #include "Patch.h"
 #include "parser.h"
+#include "RotateAnimation.h"
 #include <sstream>
 #include <list>
 #include <math.h>
@@ -12,7 +13,11 @@
 
 #include "cgf/CGFappearance.h"
 
+//Animation objects declaration
 
+
+unsigned int pos = 0;
+unsigned int size = 0;
 
 
 Scene::Scene(Elems* globals,elemContainer* lconfig):lights(), cameras(), cam(0), light(1){
@@ -32,7 +37,7 @@ Scene::Scene(Elems* globals,elemContainer* lconfig):lights(), cameras(), cam(0),
 			ss << (*it)->attr["a"]; ss >> background[3];
 
 		} else if( (*it)->name == "polygon" ){
-	        //<polygon mode="fill" shading="gouraud" />
+			//<polygon mode="fill" shading="gouraud" />
 			polygMode = (*it)->attr["mode"];
 			polygShading = (*it)->attr["shading"];
 
@@ -50,8 +55,8 @@ Scene::Scene(Elems* globals,elemContainer* lconfig):lights(), cameras(), cam(0),
 	delete globals;
 
 	//LIGHTING CONFIG STUFF
-//root	   <lighting doublesided="false" local="true" enabled="true" >
-//	  elems:     <ambient r="1" g="1" b="1" a="0" />
+	//root	   <lighting doublesided="false" local="true" enabled="true" >
+	//	  elems:     <ambient r="1" g="1" b="1" a="0" />
 	if( lconfig->root->attr["doublesided"] == "true" )
 		this->doublesided = true;
 	else
@@ -109,7 +114,7 @@ void Scene::init()
 		mode = (polygMode == "point" ? GL_POINT : 0);
 
 
-//CULLING AND POLYGON MODES
+	//CULLING AND POLYGON MODES
 	if(cullEnabled){
 
 		glEnable(GL_CULL_FACE);
@@ -167,12 +172,42 @@ void Scene::init()
 			i++;
 		}
 
-
+	Animation * anim;
+	Animation * anim1;
+	Animation * anim2;
+	Animation * anim3;
+	anims = new PolyLineAnimation();
 	//compiles the display list!
 	this->display_list = glGenLists(1);
 	glNewList(this->display_list,GL_COMPILE);
-		this->graph->getRoot()->displayListDraw();
+	this->graph->getRoot()->displayListDraw();
 	glEndList();
+
+
+	RotateAnimation * rot;
+	this->setUpdatePeriod(100);
+	temp = new GraphNode("cylinder",new Cylinder(1,1,1,50,50), NULL);
+	//temp->translate(4,4,4);
+
+	anim = new LineAnimation(0,0,0, 0,10,10,temp,5);
+	anims->addAnimation(anim);
+//	rot = new RotateAnimation(temp, 3, 90);
+//	anims->addAnimation(rot);
+
+	anim1 = new LineAnimation(0,10,10, 10,10,10,temp,5);
+	anim2 = new LineAnimation(10,10,10,10,10,3,temp,5);
+	anim3 = new LineAnimation(10,10,3, 2,4,3,temp,5);
+
+
+	//Add the animations to apply
+	anims->addAnimation(anim);
+	anims->addAnimation(anim1);
+	anims->addAnimation(anim2);
+	anims->addAnimation(anim3);
+
+//	anims->addAnimation(rot);
+	//Get size of animations' vector
+	size = anims->getAnimations().size();
 
 
 	elem * e = new elem;
@@ -188,12 +223,20 @@ void Scene::init()
 	terr = new Terrain(e);
 }
 
-void Scene::update(long t)
-{
-	cout << t << "\n";
+void Scene::update(long t){
+	cout << "Last update: " << t << endl;
+//	cout << "Size: " << size << endl;
+	if(anims->getAnimations()[pos]->end == true){
+		if (pos < size-1)
+		{
+			pos++;cout << "next animation " << pos ;
+			anims->getAnimations()[pos]->time = t;
+		}
+	}
+
+	 anims->getAnimations()[pos]->updateTime(t);
 
 }
-
 void Scene::display()
 {
 	// ---- BEGIN Background, camera and axis setup
@@ -240,7 +283,7 @@ void Scene::display()
 	axis.draw();
 
 
-	//shader testing and stuff
+	temp->draw();
 
 	terr->draw();
 

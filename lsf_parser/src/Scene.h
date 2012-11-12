@@ -10,7 +10,7 @@
 #include "Graph.h"
 #include "Light.h"
 #include "Cameras.h"
-
+#include "PolyLineAnimation.h"
 
 class Scene : public CGFscene
 {
@@ -42,6 +42,8 @@ private:
 
 	Terrain * terr;
 
+	GraphNode* temp;
+	PolyLineAnimation * anims;
 public:
 	//params: globals, lightingconfig
 	Scene(Elems*,elemContainer*);

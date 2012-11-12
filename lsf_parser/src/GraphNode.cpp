@@ -6,6 +6,9 @@ GraphNode::GraphNode() {
 	this->children = list<GraphNode *>();
 	createIdentityMatrix(transformations);
 	display_list =  false;
+	xyz[0]=0;
+	xyz[1]=0;
+	xyz[2]=0;
 
 }
 
@@ -16,7 +19,9 @@ GraphNode::GraphNode(string i, CGFobject * o, appearence *m) {
 	this->children = list<GraphNode *>();
 	createIdentityMatrix(transformations);
 	display_list =  false;
-
+	xyz[0]=0;
+	xyz[1]=0;
+	xyz[2]=0;
 }
 
 void GraphNode::setId(string _id){
@@ -61,6 +66,9 @@ void GraphNode::setDisplayList(bool displ){
 
 //transformation functions
 void GraphNode::translate(double x, double y, double z){
+	xyz[0]+=x;
+	xyz[1]+=y;
+	xyz[2]+=z;
 	double *mat = createMatrixTranslate(x,y,z);
 	multMatrix( this->transformations, mat);
 	delete mat;
@@ -71,9 +79,26 @@ void GraphNode::scale(double x, double y, double z){
 	delete mat;
 }
 void GraphNode::rotate(string eixo, double ang){
- 	double *mat = createMatrixRotate(eixo,ang);
+	double angle = ang *(3.1475)/180;
+
+	if(eixo == "y") {
+		xyz[0] = cos(angle);
+		xyz[1] = sin(angle);
+	}
+
+	double *mat = createMatrixRotate(eixo,ang);
 	multMatrix( this->transformations, mat);
 	delete mat;
+}
+
+
+
+void GraphNode::Orientate(double angle) {
+	//translate(-xyz[0],-xyz[1],-xyz[2]);
+	double *mat = createMatrixRotate("y",angle);
+	multMatrix( this->transformations, mat);
+	delete mat;
+	//translate(xyz[0],xyz[1],xyz[2]);
 }
 
 void GraphNode::draw(){
@@ -92,9 +117,9 @@ void GraphNode::draw(){
 
 	}
 
-		list<GraphNode *>::iterator it;
-		for(it = children.begin() ; it != children.end() ; it++)
-			(*it)->draw();
+	list<GraphNode *>::iterator it;
+	for(it = children.begin() ; it != children.end() ; it++)
+		(*it)->draw();
 
 	glPopMatrix();
 
@@ -114,9 +139,9 @@ void GraphNode::displayListDraw(){
 			obj->draw();
 	}
 
-		list<GraphNode *>::iterator it;
-		for(it = children.begin() ; it != children.end() ; it++)
-			(*it)->displayListDraw();
+	list<GraphNode *>::iterator it;
+	for(it = children.begin() ; it != children.end() ; it++)
+		(*it)->displayListDraw();
 
 	glPopMatrix();
 }
@@ -263,7 +288,6 @@ double* createIdentityMatrix(double* mat){
 
 	return mat;
 }
-
 
 
 
