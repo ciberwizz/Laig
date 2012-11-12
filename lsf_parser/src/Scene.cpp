@@ -9,8 +9,6 @@
 #include <sstream>
 #include <list>
 #include <math.h>
-
-
 #include "cgf/CGFappearance.h"
 
 //Animation objects declaration
@@ -186,21 +184,20 @@ void Scene::init()
 
 	RotateAnimation * rot;
 	this->setUpdatePeriod(100);
-	temp = new GraphNode("cylinder",new Cylinder(1,1,1,50,50), NULL);
-	//temp->translate(4,4,4);
+	temp = new GraphNode("cylinder",new Vehicle(),NULL);//new Cylinder(1,1,1,50,50), NULL);
+	temp->translate(40,4,40);
 
-	anim = new LineAnimation(0,0,0, 0,10,10,temp,5);
-	anims->addAnimation(anim);
+//	anim = new LineAnimation(0,0,0,0,10,10,temp,5);
 //	rot = new RotateAnimation(temp, 3, 90);
 //	anims->addAnimation(rot);
 
 	anim1 = new LineAnimation(0,10,10, 10,10,10,temp,5);
 	anim2 = new LineAnimation(10,10,10,10,10,3,temp,5);
-	anim3 = new LineAnimation(10,10,3, 2,4,3,temp,5);
+	anim3 = new LineAnimation(10,10,3,2,4,3,temp,5);
 
 
 	//Add the animations to apply
-	anims->addAnimation(anim);
+//	anims->addAnimation(anim);
 	anims->addAnimation(anim1);
 	anims->addAnimation(anim2);
 	anims->addAnimation(anim3);
@@ -290,14 +287,14 @@ void Scene::display()
 
 
 	//draw Display list!0
-	glCallList(this->display_list);
+/*	glCallList(this->display_list);
 
 
 	//TODO DRAW OBJECTS AND SHIT
 	if(graph != NULL)
 	{
 		graph->getRoot()->draw();
-	}
+	}*/
 
 	// We have been drawing in a memory area that is not visible - the back buffer,
 	// while the graphics card is showing the contents of another buffer - the front buffer

@@ -16,6 +16,7 @@ private:
 	appearence * appear;
 	list<GraphNode *> children;
 	bool display_list;
+	double xyz[3];
 public:
 	GraphNode();
 	GraphNode(string, CGFobject * o, appearence * m);
@@ -39,7 +40,7 @@ public:
 	void translate(double, double, double);
 	void scale(double, double, double);
 	void rotate(string,double);
-
+	void Orientate(double);
 	void draw();
 
 	void displayListDraw();

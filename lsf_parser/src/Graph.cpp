@@ -26,12 +26,13 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
     {
       //Create nem Graphnode
       GraphNode * n = new GraphNode();
-
+cout << "1\n";
       //List that will contain the children's Ids
       list<string> * children = new list<string>();
       //Variable where the appearance of this node will be stored
       string appearance = "";
 
+      cout << "2\n";
       //Node to be scanned
       string nodeName = (*it)->root->attr["id"];
       n->setId(nodeName);
@@ -44,13 +45,13 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
     		  cout << "its false\n";
       else cout << "it doesn't have!\n";
 
-
+      cout << "3\n";
       //Parse ElemContainers
       for (ElemContainers::iterator ecit = (*it)->elemCs->begin();
           ecit != (*it)->elemCs->end(); ecit++)
         {
           string temp = (*ecit)->root->name;
-
+          cout << "4\n";
           //If ElemContainers is transforms
           if(temp == "transforms")
             {
@@ -60,7 +61,6 @@ void Graph::getGraph(BigElemContainers* bec, string ID)
                   //If we want to do a rotation
                   if((*eit)-> name == "rotate")
                     {
-
                       //Conversion of parameter "angle" from string to int
                       istringstream angle((*eit)->attr["angle"]);
                       int angleInt;
