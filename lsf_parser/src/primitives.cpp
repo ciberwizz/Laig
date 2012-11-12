@@ -162,7 +162,7 @@ void Cylinder::draw()
 	gluCylinder(quadratic, baseRadius, topRadius, height, slices, stacks);
 
 
-;
+
 	//bottom
 	glPushMatrix();
 		glRotated(180,0,1,0);
